@@ -33,7 +33,8 @@ services:
       # Port No of Host(non-overlapable):Port No of Container(overlappable)
     networks:
       - STGprd_devpkg_dev_network
-    command: python manage.py runserver 0.0.0.0:8000
+    command: django-admin startproject config .
+    # command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - 134dbs_dev
 
