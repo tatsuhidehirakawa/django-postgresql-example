@@ -19,11 +19,8 @@ init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	docker compose --env-file ../dev.env up 110wbs_dev -d
 
 start.py:
-	docker exec -it 124djg_dev django-admin startproject config . sh
-
-run.py:
-	docker exec -it 124djg_dev python manage.py runserver 0.0.0.0:8000 bash
-
+	docker exec -it 124djg_dev django-admin startproject config . 
+	docker exec -it 124djg_dev python manage.py runserver 0.0.0.0:800
 
 
 #---[ 2. system booting ]-----------------------------------------------
