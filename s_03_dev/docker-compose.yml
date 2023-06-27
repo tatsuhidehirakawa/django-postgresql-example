@@ -1,0 +1,66 @@
+version: "3"
+services:
+
+  # 110wbs_dev:
+  #   container_name: 110wbs_dev
+  #   build: ./110wbs_dev
+  #   volumes:
+  #     - ../s_01_src/110wbs_src:/usr/src/app
+  #     - wbs-vol:/usr/src/app
+  #   working_dir: /usr/src/app
+  #   environment:
+  #     - CHOKIDAR_USEPOLLING=true # Hot-reload
+  #   ports:
+  #     - "3000:3000"
+  #   tty: true
+  #   stdin_open: true
+  #       networks:
+  #     - STGprd_devpkg_dev_network
+  #   # platform: linux/x86_64
+
+  124djg_dev:
+    container_name: 124djg_dev
+    build:
+      context: ../s_01_src/124djg_src
+      dockerfile: ../../../s_03_dev/124djg_dev/Dockerfile
+    env_file: ../dev.env
+    tty: true
+    volumes:
+      - ../s_01_src/124djg_dev:/py/src # Activate for ShellScript Operation.
+      - api-vol:/py/src # Activate for Dockerfile Opration.
+    ports:
+      - "8080:8080"
+      # Port No of Host(non-overlapable):Port No of Container(overlappable)
+    networks:
+      - STGprd_devpkg_dev_network
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - 134dbs_dev
+
+  134dbs_dev:
+    container_name: 134dbs_dev
+    image: postgres:14
+    # build: ./134dbs_dev
+    command: -c 'config_file=/etc/postgresql/postgresql.conf'
+    ports:
+      - 5432:5432
+    volumes:
+      - dbs-vol:/var/lib/postgresql/data
+      - ../s_01_src/134dbs_src/initdb:/docker-entrypoint-initdb.d
+      - ../s_01_src/134dbs_src/config/postgresql.conf:/etc/postgresql/postgresql.conf
+      # This directory is for generate test data from db dump and restore.
+      # Warning : Do not operate PowerShell at dump and restore.
+      # - ../s_05_tst/130dbs_tst/:/usr/src/dbstore
+    environment:
+        POSTGRES_PASSWORD: ${PGSQL_PW}
+    networks:
+      - STGprd_devpkg_dev_network
+
+volumes:
+  # wbs-vol:
+  api-vol:
+  dbs-vol:
+
+networks:
+  STGprd_devpkg_dev_network:
+    driver: bridge
