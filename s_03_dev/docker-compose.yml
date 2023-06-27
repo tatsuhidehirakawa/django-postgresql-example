@@ -18,15 +18,15 @@ services:
   #     - STGprd_devpkg_dev_network
   #   # platform: linux/x86_64
 
-  124djg_dev:
-    container_name: 124djg_dev
+  124dja_dev:
+    container_name: 124dja_dev
     build:
-      context: ../s_01_src/124djg_src
-      dockerfile: ../../s_03_dev/124djg_dev/Dockerfile
+      context: ../s_01_src/124dja_src
+      dockerfile: ../../s_03_dev/124dja_dev/Dockerfile
     env_file: ../dev.env
     tty: true
     volumes:
-      - ../s_01_src/124djg_src:/code
+      - ../s_01_src/124dja_src:/code
       # - api-vol:/code
     ports:
       - "8000:8000"

@@ -12,16 +12,16 @@ init.dev: ## Initializing only frontend devlopment containers.
 init.dev.dbs: ## Booting only frontend devlopment containers.
 	docker compose --env-file ../dev.env up 134dbs_dev -d
 
-init.dev.api: ## Booting only frontend devlopment containers.
-	docker compose --env-file ../dev.env up 124djg_dev -d
+# init.dev.api: ## Booting only frontend devlopment containers.
+# 	docker compose --env-file ../dev.env up 124api_dev -d
 
-init.dev.wbs: ## Initilazing only frontend devlopment containers.
-	docker compose --env-file ../dev.env up 110wbs_dev -d
+# init.dev.wbs: ## Initilazing only frontend devlopment containers.
+# 	docker compose --env-file ../dev.env up 110wbs_dev -d
 
-start.py:
-	docker exec -it 124djg_dev django-admin startproject config . 
-	docker exec -it 124djg_dev python manage.py runserver 0.0.0.0:800
-
+init.dev.dja:
+	docker compose --env-file ../dev.env up 124dja_dev -d
+	docker exec -it 124dja_dev django-admin startproject config . 
+	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
 
 #---[ 2. system booting ]-----------------------------------------------
 
