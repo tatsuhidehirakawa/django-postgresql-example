@@ -27,7 +27,7 @@ services:
     tty: true
     volumes:
       - ../s_01_src/124djg_src:/code
-      - api-vol:/code
+      # - api-vol:/code
     ports:
       - "8000:8000"
       # Port No of Host(non-overlapable):Port No of Container(overlappable)
@@ -58,7 +58,7 @@ services:
 
 volumes:
   # wbs-vol:
-  api-vol:
+  # api-vol:
   dbs-vol:
 
 networks:
