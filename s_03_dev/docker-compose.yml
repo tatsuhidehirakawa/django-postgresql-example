@@ -22,7 +22,7 @@ services:
     container_name: 124djg_dev
     build:
       context: ../s_01_src/124djg_src
-      dockerfile: ../../../s_03_dev/124djg_dev/Dockerfile
+      dockerfile: ../../s_03_dev/124djg_dev/Dockerfile
     env_file: ../dev.env
     tty: true
     volumes:
