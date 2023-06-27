@@ -26,10 +26,10 @@ services:
     env_file: ../dev.env
     tty: true
     volumes:
-      - ../s_01_src/124djg_dev:/py/src # Activate for ShellScript Operation.
-      - api-vol:/py/src # Activate for Dockerfile Opration.
+      - ../s_01_src/124djg_src:/code
+      - api-vol:/code
     ports:
-      - "8080:8080"
+      - "8000:8000"
       # Port No of Host(non-overlapable):Port No of Container(overlappable)
     networks:
       - STGprd_devpkg_dev_network
