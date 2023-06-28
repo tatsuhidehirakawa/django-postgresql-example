@@ -9,9 +9,6 @@ init.dev: ## Initializing only frontend devlopment containers.
 	make init.dev.wbs
 	@echo "Succeful initializing devlopment environment!"
 
-init.dev.dbs: ## Booting only frontend devlopment containers.
-	docker compose --env-file ../dev.env up 134dbs_dev -d
-
 # init.dev.api: ## Booting only frontend devlopment containers.
 # 	docker compose --env-file ../dev.env up 124api_dev -d
 
@@ -20,7 +17,7 @@ init.dev.wbs: ## Initilazing only frontend devlopment containers.
 
 
 
-
+#---[ 1. Api(dja) Manipulation ]-----------------------------------------------
 
 init.dev.dja: ## Initializing Django devlopment containers.
 	docker compose --env-file ../dev.env up 124dja_dev -d
@@ -37,7 +34,14 @@ insert.code.dja:
 	@docker cp ../s_01_src/124dja_src/public 124dja_dev:code
 	@docker cp ../s_01_src/124dja_src/src 124dja_dev:code
 
+boot.dev.api: ## Booting  Django devlopment containers.
+	docker compose --env-file ../dev.env up 124api_dev -d
+	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
 
+#---[ 1. Dbs Manipulation ]-----------------------------------------------
+
+init.dev.dbs: ## Booting only frontend devlopment containers.
+	docker compose --env-file ../dev.env up 134dbs_dev -d
 
 
 
@@ -54,8 +58,6 @@ boot.dev:
 boot.dev.dbs: ## Booting only frontend devlopment containers.
 	docker compose --env-file ../dev.env up 134dbs_dev -d
 
-boot.dev.api: ## Booting only frontend devlopment containers.
-	docker compose --env-file ../dev.env up 124api_dev -d
 
 boot.dev.wbs: ## Initilazing only frontend devlopment containers.
 	docker compose --env-file ../dev.env up 110wbs_dev -d
