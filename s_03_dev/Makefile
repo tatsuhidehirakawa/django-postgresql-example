@@ -18,12 +18,29 @@ init.dev.dbs: ## Booting only frontend devlopment containers.
 init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	docker compose --env-file ../dev.env up 110wbs_dev -d
 
+
+
+
+
 init.dev.dja: ## Initializing Django devlopment containers.
 	docker compose --env-file ../dev.env up 124dja_dev -d
 	docker cp ../s_03_dev/124dja_dev/requirements.txt 124dja_dev:code
 	docker exec -it 124dja_dev pip install -r requirements.txt
 	docker exec -it 124dja_dev django-admin startproject config . 
 	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
+
+eject.data.dja:
+	@docker cp 124dja_dev:code/config ../s_01_src/124dja_src/
+	@docker cp 124dja_dev:code/manage.py ../s_01_src/124dja_src/
+
+insert.code.dja:
+	@docker cp ../s_01_src/124dja_src/public 124dja_dev:code
+	@docker cp ../s_01_src/124dja_src/src 124dja_dev:code
+
+
+
+
+
 
 #---[ 2. system booting ]-----------------------------------------------
 
