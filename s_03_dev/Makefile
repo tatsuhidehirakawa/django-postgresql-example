@@ -33,13 +33,13 @@ init.dev.dja: ## Initializing Django devlopment containers.
 	docker cp ../s_03_dev/124dja_dev/requirements.txt 124dja_dev:code
 	docker exec -it 124dja_dev pip install -r requirements.txt
 	# docker exec -it 124dja_dev pip install djangorestframework
-	docker exec -it 124dja_dev pip install markdown
-	docker exec -it 124dja_dev pip install django-filter
+	# docker exec -it 124dja_dev pip install markdown
+	# docker exec -it 124dja_dev pip install django-filter
 	docker exec -it 124dja_dev django-admin startproject config .
 	# docker exec -it 124dja_dev python manage.py startapp apiv1
-	docker cp ../s_01_src/124dja_src/config/settings.py 124dja_dev:code/config/
-	docker cp ../s_01_src/124dja_src/config/urls.py 124dja_dev:code/config/
-	# docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
+	# docker cp ../s_01_src/124dja_src/config/settings.py 124dja_dev:code/config/
+	# docker cp ../s_01_src/124dja_src/config/urls.py 124dja_dev:code/config/
+	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
 
 eject.data.dja:
 	@docker cp 124dja_dev:code/config/settings.py ../s_01_src/124dja_src/config
