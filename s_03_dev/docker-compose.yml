@@ -15,7 +15,7 @@ services:
     tty: true
     stdin_open: true
     networks:
-      - STGprd_devpkg_dev_network
+      - django_react_postgresql_sample_network
     # platform: linux/x86_64
 
   124dja_dev:
@@ -32,11 +32,11 @@ services:
       - "8000:8000"
       # Port No of Host(non-overlapable):Port No of Container(overlappable)
     networks:
-      - STGprd_devpkg_dev_network
+      - django_react_postgresql_sample_network
     # command: django-admin startproject config .
     # command: python manage.py runserver 0.0.0.0:8000
-    depends_on:
-      - 134dbs_dev
+    # depends_on:
+    #   - 134dbs_dev
 
   134dbs_dev:
     container_name: 134dbs_dev
@@ -55,7 +55,7 @@ services:
     environment:
         POSTGRES_PASSWORD: ${PGSQL_PW}
     networks:
-      - STGprd_devpkg_dev_network
+      - django_react_postgresql_sample_network
 
 volumes:
   wbs-vol:
@@ -63,5 +63,5 @@ volumes:
   dbs-vol:
 
 networks:
-  STGprd_devpkg_dev_network:
+  django_react_postgresql_sample_network:
     driver: bridge
