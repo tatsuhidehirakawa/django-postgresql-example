@@ -34,12 +34,12 @@ init.dev.dja: ## Initializing Django devlopment containers.
 	docker exec -it 124dja_dev pip install -r requirements.txt
 	docker exec -it 124dja_dev pip install markdown
 	docker exec -it 124dja_dev pip install django-filter
-	make projectsetting PROJ_NAME=config
-	# make projectsetting PROJ_NAME=user_management
-	# make projectsetting PROJ_NAME=app2
+	make set.proj.dja PROJ_NAME=config
+	# make set.proj.dja PROJ_NAME=user_management
+	# make set.proj.dja PROJ_NAME=app2
 	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
 
-projectsetting:
+set.proj.dja:
 	docker exec -it 124dja_dev django-admin startproject $(PROJ_NAME) .
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/settings.py 124dja_dev:code/$(PROJ_NAME)
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/urls.py 124dja_dev:code/$(PROJ_NAME)
