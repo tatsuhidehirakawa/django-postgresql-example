@@ -1,6 +1,5 @@
 #.PHONY:
 
-
 #---[ 1. system initialize ]-----------------------------------------------
 
 init.dev: ## Initializing only frontend devlopment containers.
@@ -35,18 +34,18 @@ init.dev.dja: ## Initializing Django devlopment containers.
 	docker exec -it 124dja_dev pip install -r requirements.txt
 	docker exec -it 124dja_dev pip install markdown
 	docker exec -it 124dja_dev pip install django-filter
-	make startproject PROG_NAME=config
-	# make startproject PROG_NAME=user_management
-	# make startproject PROG_NAME=app2
+	make startproject PROJ_NAME=config
+	# make startproject PROJ_NAME=user_management
+	# make startproject PROJ_NAME=app2
 	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
 
 startproject:
-	docker exec -it 124dja_dev django-admin startproject $(PROG_NAME) .
-	docker cp ../s_01_src/124dja_src/$(PROG_NAME)/settings.py 124dja_dev:code/$(PROG_NAME)
-	docker cp ../s_01_src/124dja_src/$(PROG_NAME)/urls.py 124dja_dev:code/$(PROG_NAME)
+	docker exec -it 124dja_dev django-admin startproject $(PROJ_NAME) .
+	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/settings.py 124dja_dev:code/$(PROJ_NAME)
+	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/urls.py 124dja_dev:code/$(PROJ_NAME)
 
 eject.data.dja:
-	docker cp 124dja_dev:code/$(PROG_NAME)/ ../s_01_src/124dja_src/
+	docker cp 124dja_dev:code/$(PROJ_NAME)/ ../s_01_src/124dja_src/
 	docker cp 124dja_dev:code/db.sqlite3 ../s_01_src/124dja_src/
 	docker cp 124dja_dev:code/manage.py ../s_01_src/124dja_src/
 
