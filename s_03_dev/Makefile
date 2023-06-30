@@ -26,31 +26,29 @@ init.tailwindcss:
 	@docker cp ../s_03_dev/110wbs_dev/TailwindCSS/index.css 110wbs_dev:usr/src/app/src
 	@docker restart 110wbs_dev
 
-#---[ 1. Api(dja) Manipulation ]-----------------------------------------------
-
-PROG_NAME:=config
+#---[ 1. Api(dja) Container Manipulation ]---------------------------------
 
 init.dev.dja: ## Initializing Django devlopment containers.
 	docker compose --env-file ../dev.env up 124dja_dev -d
 	docker cp ../s_03_dev/124dja_dev/requirements.txt 124dja_dev:code
 	docker exec -it 124dja_dev pip install --upgrade pip
 	docker exec -it 124dja_dev pip install -r requirements.txt
-	# docker exec -it 124dja_dev pip install djangorestframework
 	docker exec -it 124dja_dev pip install markdown
 	docker exec -it 124dja_dev pip install django-filter
-	docker exec -it 124dja_dev django-admin startproject $(PROG_NAME) .
-	# docker exec -it 124dja_dev python manage.py startapp apiv1
-	docker cp ../s_03_dev/124dja_dev/settings.py 124dja_dev:code/$(PROG_NAME)
-	docker cp ../s_03_dev/124dja_dev/urls.py 124dja_dev:code/$(PROG_NAME)
+	make startproject PROG_NAME=config
+	# make startproject PROG_NAME=user_management
+	# make startproject PROG_NAME=app2
 	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
 
+startproject:
+	docker exec -it 124dja_dev django-admin startproject $(PROG_NAME) .
+	docker cp ../s_01_src/124dja_src/$(PROG_NAME)/settings.py 124dja_dev:code/$(PROG_NAME)
+	docker cp ../s_01_src/124dja_src/$(PROG_NAME)/urls.py 124dja_dev:code/$(PROG_NAME)
+
 eject.data.dja:
-	# @docker cp 124dja_dev:code/$(PROG_NAME)/settings.py ../s_01_src/124dja_src/$(PROG_NAME)
-	# @docker cp 124dja_dev:code/$(PROG_NAME)/urls.py ../s_01_src/124dja_src/$(PROG_NAME)
 	docker cp 124dja_dev:code/$(PROG_NAME)/ ../s_01_src/124dja_src/
 	docker cp 124dja_dev:code/db.sqlite3 ../s_01_src/124dja_src/
 	docker cp 124dja_dev:code/manage.py ../s_01_src/124dja_src/
-	docker cp 124dja_dev:code/requirements.txt ../s_01_src/124dja_src/
 
 insert.code.dja:
 	@docker cp ../s_01_src/124dja_src/public 124dja_dev:code
