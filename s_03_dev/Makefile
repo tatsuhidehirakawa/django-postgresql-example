@@ -27,6 +27,8 @@ init.tailwindcss:
 
 #---[ 1. Api(dja) Container Manipulation ]---------------------------------
 
+PROJ_NAME:=config
+
 init.dev.dja: ## Initializing Django devlopment containers.
 	docker compose --env-file ../dev.env up 124dja_dev -d
 	docker cp ../s_03_dev/124dja_dev/requirements.txt 124dja_dev:code
@@ -34,9 +36,8 @@ init.dev.dja: ## Initializing Django devlopment containers.
 	docker exec -it 124dja_dev pip install -r requirements.txt
 	docker exec -it 124dja_dev pip install markdown
 	docker exec -it 124dja_dev pip install django-filter
-	make set.proj.dja PROJ_NAME=config
-	# make set.proj.dja PROJ_NAME=user_management
-	# make set.proj.dja PROJ_NAME=app2
+	docker exec -it 124dja_dev pip install python-dotenv
+	make set.proj.dja 
 	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
 
 set.proj.dja:
