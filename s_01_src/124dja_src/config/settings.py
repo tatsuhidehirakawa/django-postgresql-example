@@ -9,11 +9,10 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-# import os                        # <-環境変数読み込み
+import os                        # <-環境変数読み込み
 from pathlib import Path
-# from dotenv import load_dotenv   # <-環境変数読み込み
-
-# load_dotenv()                    # <-環境変数読み込み
+from dotenv import load_dotenv   # <-環境変数読み込み
+load_dotenv()                    # <-環境変数読み込み
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +27,7 @@ SECRET_KEY = 'django-insecure-&l@+n!xeh_d=)@wv=fr64$!y%**9wn-d%)z2%y0xqy$)db*$@f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']            # <- changed.
+ALLOWED_HOSTS = ['*']               # <- changed.
 
 # Application definition
 
@@ -39,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',            # <- added.
+    'rest_framework',               # <- added.
 ]
 
 MIDDLEWARE = [
@@ -76,23 +75,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DATABASE_HOST'),
-#         'USER': os.getenv('USER'),
-#         'PASSWORD': os.getenv('PGSQL_PW'),
-#         'HOST': os.getenv('DATABASE_HOST'),
-#         'PORT': os.getenv('DB_PORT'),
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('USER'),
+        'USER': os.getenv('USER'),
+        'PASSWORD': os.getenv('PGSQL_PW'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
