@@ -52,7 +52,7 @@ init.dev.dja: ## Initializing Django devlopment containers.
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/settings.py $(CONT_NAME):code/$(PROJ_NAME)
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/urls.py $(CONT_NAME):code/$(PROJ_NAME)
 	make migrate
-	docker exec -itd $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
+	docker exec -it $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
 
 pipset:
 	docker cp ../s_03_dev/$(CONT_NAME)/requirements.txt $(CONT_NAME):code
