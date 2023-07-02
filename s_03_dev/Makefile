@@ -11,6 +11,8 @@ init.dev: ## Initializing only frontend devlopment containers.
 # init.dev.api: ## Booting only frontend devlopment containers.
 # 	docker compose --env-file ../dev.env up 124api_dev -d
 
+#---[ 2. Web Container(110wbs_dev) Manipulation ]---------------------------
+
 init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	docker compose --env-file ../dev.env up 110wbs_dev -d
 
@@ -25,40 +27,65 @@ init.tailwindcss:
 	@docker cp ../s_03_dev/110wbs_dev/TailwindCSS/index.css 110wbs_dev:usr/src/app/src
 	@docker restart 110wbs_dev
 
-#---[ 1. Api(dja) Container Manipulation ]---------------------------------
+#---[ 3. API Container(124dja_dev) Manipulation ]---------------------------
 
+CONT_NAME:=124dja_dev
 PROJ_NAME:=config
+APP_NAME_1:=users
+# APP_NAME_2:=news
+# APP_NAME_3:=blog
+# APP_NAME_4:=
+# APP_NAME_5:=
+
+boot.dev.dja: ## Booting  Django devlopment containers.
+	docker compose --env-file ../dev.env up $(CONT_NAME) -d
+	make pipset
+	make insert.code.dja
+	make migrate
+	docker exec -it $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
 
 init.dev.dja: ## Initializing Django devlopment containers.
-	docker compose --env-file ../dev.env up 124dja_dev -d
-	docker cp ../s_03_dev/124dja_dev/requirements.txt 124dja_dev:code
-	docker exec -it 124dja_dev pip install --upgrade pip
-	docker exec -it 124dja_dev pip install -r requirements.txt
-	docker exec -it 124dja_dev pip install markdown
-	docker exec -it 124dja_dev pip install django-filter
-	docker exec -it 124dja_dev pip install python-dotenv
-	make set.proj.dja 
-	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
+	docker compose --env-file ../dev.env up $(CONT_NAME) -d
+	make pipset
+	make statprj
+	make statapp
+	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/settings.py $(CONT_NAME):code/$(PROJ_NAME)
+	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/urls.py $(CONT_NAME):code/$(PROJ_NAME)
+	make migrate
+	docker exec -itd $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
 
-set.proj.dja:
-	docker exec -it 124dja_dev django-admin startproject $(PROJ_NAME) .
-	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/settings.py 124dja_dev:code/$(PROJ_NAME)
-	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/urls.py 124dja_dev:code/$(PROJ_NAME)
+pipset:
+	docker cp ../s_03_dev/$(CONT_NAME)/requirements.txt $(CONT_NAME):code
+	docker exec -it $(CONT_NAME) pip install --upgrade pip
+	docker exec -it $(CONT_NAME) pip install -r requirements.txt
+	docker exec -it $(CONT_NAME) pip install markdown
+	docker exec -it $(CONT_NAME) pip install django-filter
+	docker exec -it $(CONT_NAME) pip install python-dotenv
 
-eject.data.dja:
-	docker cp 124dja_dev:code/$(PROJ_NAME)/ ../s_01_src/124dja_src/
-	docker cp 124dja_dev:code/db.sqlite3 ../s_01_src/124dja_src/
-	docker cp 124dja_dev:code/manage.py ../s_01_src/124dja_src/
+statprj:
+	docker exec -it $(CONT_NAME) django-admin startproject $(PROJ_NAME) .
+
+statapp:
+	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_1)
+
+migrate:
+	docker exec -it $(CONT_NAME) python manage.py makemigrations
+	docker exec -it $(CONT_NAME) python manage.py migrate
 
 insert.code.dja:
-	@docker cp ../s_01_src/124dja_src/public 124dja_dev:code
-	@docker cp ../s_01_src/124dja_src/src 124dja_dev:code
+	docker cp ../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
+	docker cp ../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/$(PROJ_NAME)
+	docker cp ../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/$(APP_NAME_1)
+	# docker cp ../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/$(APP_NAME_2)
+	# docker cp ../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/$(APP_NAME_3)
 
-boot.dev.api: ## Booting  Django devlopment containers.
-	docker compose --env-file ../dev.env up 124api_dev -d
-	docker exec -it 124dja_dev python manage.py runserver 0.0.0.0:8000
+eject.code.dja:
+	docker cp $(CONT_NAME):code/$(PROJ_NAME)/ ../s_01_src/124dja_src/
+	docker cp $(CONT_NAME):code/$(APP_NAME_1) ../s_01_src/124dja_src/
+	# docker cp $(CONT_NAME):code/$(APP_NAME_2) ../s_01_src/124dja_src/
+	docker cp $(CONT_NAME):code/manage.py ../s_01_src/124dja_src/
 
-#---[ 1. Dbs Manipulation ]-----------------------------------------------
+#---[ 4. Dbs Manipulation ]-----------------------------------------------
 
 init.dev.dbs: ## Booting only frontend devlopment containers.
 	docker compose --env-file ../dev.env up 134dbs_dev -d
@@ -66,7 +93,7 @@ init.dev.dbs: ## Booting only frontend devlopment containers.
 
 
 
-#---[ 2. system booting ]-----------------------------------------------
+#---[ 5. system booting ]-----------------------------------------------
 
 boot.dev:
 	make boot.dev.dbs
@@ -86,3 +113,25 @@ boot.dev.wbs: ## Initilazing only frontend devlopment containers.
 set.code.dev:
 	@make insert.data.dbs
 	@make insert.code.wbs
+
+
+
+
+purge.cont.all:
+	docker container ls -a
+	docker system df
+	docker stop $$(docker ps -q)
+	docker volume rm $$(docker volume ls -qf dangling=true)
+	docker container prune -f
+	docker image prune -a -f
+	docker builder prune -f
+	# docker images -a -f
+	# docker container ls -a
+	# docker system df
+
+
+ddd:
+	docker image prune -a -f
+
+ccc:
+	docker container ls -a; docker system df; docker stop $(docker ps -q); docker volume rm $(docker volume ls -qf dangling=true); docker container prune -f; docker image prune -a -f; docker builder prune -f; docker images -a -f; docker container ls -a; docker system df

@@ -8,7 +8,7 @@ init.all: ## Initialize and booting all containers and services.
 	# make init.stg
 
 init.dev: ## Booting only frontend devlopment containers.
-	cd s_03_dev && make init.dev
+	cd s_03_dev && make init.dev.dja
 
 init.tst: ## Booting only backend testing containers.
 	cd s_05_tst && make init.tst
