@@ -39,22 +39,23 @@ APP_NAME_1:=users
 
 boot.dev.dja: ## Booting  Django devlopment containers.
 	docker compose --env-file ../dev.env up $(CONT_NAME) -d
-	make pipset
-	make insert.code.dja
-	make migrate
+	make pipset.dja
+	make insert.dja
+	make migrate.dja
 	docker exec -it $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
 
 init.dev.dja: ## Initializing Django devlopment containers.
 	docker compose --env-file ../dev.env up $(CONT_NAME) -d
-	make pipset
-	make statprj
-	make statapp
+	make pipset.dja
+	make statprj.dja
+	make statapp.dja
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/settings.py $(CONT_NAME):code/$(PROJ_NAME)
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/urls.py $(CONT_NAME):code/$(PROJ_NAME)
-	make migrate
+	make migrate.dja
+	make eject.dja
 	docker exec -it $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
 
-pipset:
+pipset.dja:
 	docker cp ../s_03_dev/$(CONT_NAME)/requirements.txt $(CONT_NAME):code
 	docker exec -it $(CONT_NAME) pip install --upgrade pip
 	docker exec -it $(CONT_NAME) pip install -r requirements.txt
@@ -62,24 +63,24 @@ pipset:
 	docker exec -it $(CONT_NAME) pip install django-filter
 	docker exec -it $(CONT_NAME) pip install python-dotenv
 
-statprj:
+statprj.dja:
 	docker exec -it $(CONT_NAME) django-admin startproject $(PROJ_NAME) .
 
-statapp:
+statapp.dja:
 	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_1)
 
-migrate:
+migrate.dja:
 	docker exec -it $(CONT_NAME) python manage.py makemigrations
 	docker exec -it $(CONT_NAME) python manage.py migrate
 
-insert.code.dja:
+insert.dja:
 	docker cp ../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/$(PROJ_NAME)
 	docker cp ../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/$(APP_NAME_1)
 	# docker cp ../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/$(APP_NAME_2)
 	# docker cp ../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/$(APP_NAME_3)
 
-eject.code.dja:
+eject.dja:
 	docker cp $(CONT_NAME):code/$(PROJ_NAME)/ ../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(APP_NAME_1) ../s_01_src/124dja_src/
 	# docker cp $(CONT_NAME):code/$(APP_NAME_2) ../s_01_src/124dja_src/
