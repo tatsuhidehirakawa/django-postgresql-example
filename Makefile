@@ -1,5 +1,6 @@
 #.PHONY:
 
+
 #---[ 1. system boot ]-------------------------------------------------------
 
 init.all: ## Initialize and booting all containers and services.
@@ -17,3 +18,6 @@ init.stg: ## Booting only backend staging containers.
 	cd s_06_tst && make init.stg
 
 #---[ 3. Tst env boot ]------------------------------------------------
+
+drfver:
+	cd s_03_dev && make drfver

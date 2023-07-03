@@ -32,20 +32,22 @@ init.tailwindcss:
 CONT_NAME:=124dja_dev
 PROJ_NAME:=config
 APP_NAME_1:=users
-# APP_NAME_2:=news
-# APP_NAME_3:=blog
+APP_NAME_2:=news
+APP_NAME_3:=blog
 # APP_NAME_4:=
 # APP_NAME_5:=
+E_MAIL:=admin@example.com
+USER_NAME:=admin
 
 boot.dev.dja: ## Booting  Django devlopment containers.
-	docker compose --env-file ../dev.env up $(CONT_NAME) -d
+	make contup.dja
 	make pipset.dja
 	make insert.dja
 	make migrate.dja
-	docker exec -it $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
+	make run.dja
 
 init.dev.dja: ## Initializing Django devlopment containers.
-	docker compose --env-file ../dev.env up $(CONT_NAME) -d
+	make contup.dja
 	make pipset.dja
 	make statprj.dja
 	make statapp.dja
@@ -53,21 +55,29 @@ init.dev.dja: ## Initializing Django devlopment containers.
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/urls.py $(CONT_NAME):code/$(PROJ_NAME)
 	make migrate.dja
 	make eject.dja
+	make run.dja
+
+createuser.dja:
+	docker exec -it $(CONT_NAME) python manage.py createsuperuser --email $(E_MAIL) --username $(USER_NAME)
+
+contup.dja:
+	docker compose --env-file ../dev.env up $(CONT_NAME) -d
+
+run.dja:
 	docker exec -it $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
 
 pipset.dja:
 	docker cp ../s_03_dev/$(CONT_NAME)/requirements.txt $(CONT_NAME):code
 	docker exec -it $(CONT_NAME) pip install --upgrade pip
 	docker exec -it $(CONT_NAME) pip install -r requirements.txt
-	docker exec -it $(CONT_NAME) pip install markdown
-	docker exec -it $(CONT_NAME) pip install django-filter
-	docker exec -it $(CONT_NAME) pip install python-dotenv
 
 statprj.dja:
 	docker exec -it $(CONT_NAME) django-admin startproject $(PROJ_NAME) .
 
 statapp.dja:
 	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_1)
+	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_2)
+	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_3)
 
 migrate.dja:
 	docker exec -it $(CONT_NAME) python manage.py makemigrations
@@ -77,14 +87,19 @@ insert.dja:
 	docker cp ../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/$(PROJ_NAME)
 	docker cp ../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/$(APP_NAME_1)
-	# docker cp ../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/$(APP_NAME_2)
-	# docker cp ../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/$(APP_NAME_3)
+	docker cp ../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/$(APP_NAME_2)
+	docker cp ../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/$(APP_NAME_3)
 
 eject.dja:
+	docker cp $(CONT_NAME):code/manage.py ../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(PROJ_NAME)/ ../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(APP_NAME_1) ../s_01_src/124dja_src/
-	# docker cp $(CONT_NAME):code/$(APP_NAME_2) ../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/manage.py ../s_01_src/124dja_src/
+	docker cp $(CONT_NAME):code/$(APP_NAME_2) ../s_01_src/124dja_src/
+	docker cp $(CONT_NAME):code/$(APP_NAME_2) ../s_01_src/124dja_src/
+
+drfver:
+	docker exec -it 124dja_dev pip show djangorestframework
+
 
 #---[ 4. Dbs Manipulation ]-----------------------------------------------
 
