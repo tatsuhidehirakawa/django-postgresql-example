@@ -95,7 +95,7 @@ eject.dja:
 	docker cp $(CONT_NAME):code/$(PROJ_NAME)/ ../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(APP_NAME_1) ../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(APP_NAME_2) ../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(APP_NAME_2) ../s_01_src/124dja_src/
+	docker cp $(CONT_NAME):code/$(APP_NAME_3) ../s_01_src/124dja_src/
 
 drfver:
 	docker exec -it 124dja_dev pip show djangorestframework
