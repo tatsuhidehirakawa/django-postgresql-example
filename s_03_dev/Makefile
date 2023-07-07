@@ -132,15 +132,16 @@ set.code.dev:
 
 
 
+API_IMAGE:=s_03_dev-124dja_dev
 
-purge.cont.all:
-	docker container ls -a
-	docker system df
-	docker stop $$(docker ps -q)
-	docker volume rm $$(docker volume ls -qf dangling=true)
-	docker container prune -f
-	docker image prune -a -f
-	docker builder prune -f
+purge.api.cont:
+	# docker container ls -a
+	# docker system df
+	# docker stop $(CONT_NAME)
+	docker volume rm $(API_IMAGE)
+	# docker container prune -f
+	# docker image prune -a -f
+	# docker builder prune -f
 	# docker images -a -f
 	# docker container ls -a
 	# docker system df
