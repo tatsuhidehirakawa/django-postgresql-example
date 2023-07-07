@@ -15,3 +15,7 @@ VALUES ('5e9nr6eka93u','Admin','Admin@example.com','a4cjuzn2','123-4567','09/07/
 INSERT INTO offer_list
   (offer_id,account_id,offer_type,offer_title,offer_status,offer_text,create_date,update_date)
 VALUES ('5e9nr6eka93u','5e9nr6eka93u','1','xyz','2','abc','2009/07/22 0:00:00','2009/07/22 0:00:00');
+
+-- INSERT INTO user_tokens
+--   (access_token,account_id,user_password,create_date)
+-- VALUES ('5e9nr6eka93u','5e9nr6eka93u','a4cjuzn2','2009/07/22 0:00:00');
