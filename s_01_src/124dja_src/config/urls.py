@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import include # <- added.
+from django.conf.urls import include             # <- Initial changing.
 from rest_framework import routers, serializers, viewsets
 from plans import views
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter()                 # <- Initial changing.
 
 router.register(r'plans', views.PlansViewSet)
 
 urlpatterns = [
-    path('api/v1/', include(router.urls)),
+    path('api/v1/', include(router.urls)),       # <- Initial changing.
     path('admin/', admin.site.urls),
 ]

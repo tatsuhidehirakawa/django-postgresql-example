@@ -150,3 +150,8 @@ ddd:
 
 ccc:
 	docker container ls -a; docker system df; docker stop $(docker ps -q); docker volume rm $(docker volume ls -qf dangling=true); docker container prune -f; docker image prune -a -f; docker builder prune -f; docker images -a -f; docker container ls -a; docker system df
+
+
+
+insert.data.dbs:
+	@docker exec -it 134dbs_dev /usr/src/dbstore/pg_restore.sh backup_20221217215050_134dbs_dev.sql bash

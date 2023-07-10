@@ -9,10 +9,11 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import os                        # <-環境変数読み込み
+import os                                        # <- For envs.
 from pathlib import Path
-from dotenv import load_dotenv   # <-環境変数読み込み
-load_dotenv()                    # <-環境変数読み込み
+from dotenv import load_dotenv                   # <- For envs.
+
+load_dotenv()                                    # <- For envs.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-&l@+n!xeh_d=)@wv=fr64$!y%**9wn-d%)z2%y0xqy$)db*$@f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']               # <- changed.
+ALLOWED_HOSTS = ['*']                            # <- Initial changing.
 
 # Application definition
 
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',               # <- added.
+    'rest_framework',                            # <- Initial changing.
     'plans',
 ]
 
