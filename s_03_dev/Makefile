@@ -32,7 +32,7 @@ init.tailwindcss:
 CONT_NAME:=124dja_dev
 PROJ_NAME:=config
 APP_NAME_1:=users
-APP_NAME_2:=news
+APP_NAME_2:=plans
 APP_NAME_3:=blog
 # APP_NAME_4:=
 # APP_NAME_5:=

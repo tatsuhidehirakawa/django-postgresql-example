@@ -22,6 +22,6 @@ from rest_framework import routers, serializers, viewsets
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    path('api/v1', include(router.urls)),
+    path('api/v1/', include(router.urls)),
     path('admin/', admin.site.urls),
 ]
