@@ -45,7 +45,7 @@ boot.dev.dja: ## Booting  Django devlopment containers.
 	make insert.dja
 	make run.dja
 
-init.dev.dja: ## Initializing Django devlopment containers.
+init.dev.dja: ## Initializing DRF devlopment containers.
 	make contup.dja
 	make pipset.dja
 	make statprj.dja
