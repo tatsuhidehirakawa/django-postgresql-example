@@ -43,7 +43,6 @@ boot.dev.dja: ## Booting  Django devlopment containers.
 	make contup.dja
 	make pipset.dja
 	make insert.dja
-	make migrate.dja
 	make run.dja
 
 init.dev.dja: ## Initializing Django devlopment containers.

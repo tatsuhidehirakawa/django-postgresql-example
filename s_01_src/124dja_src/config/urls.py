@@ -18,8 +18,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include # <- added.
 from rest_framework import routers, serializers, viewsets
+from plans import views
 
 router = routers.DefaultRouter()
+
+router.register(r'plans', views.PlansViewSet)
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),
