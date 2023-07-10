@@ -50,8 +50,7 @@ init.dev.dja: ## Initializing Django devlopment containers.
 	make pipset.dja
 	make statprj.dja
 	make statapp.dja
-	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/settings.py $(CONT_NAME):code/$(PROJ_NAME)
-	docker cp ../s_01_src/124dja_src/$(PROJ_NAME)/urls.py $(CONT_NAME):code/$(PROJ_NAME)
+	make insert.dja
 	make migrate.dja
 	make eject.dja
 	make run.dja
@@ -83,11 +82,11 @@ migrate.dja:
 	docker exec -it $(CONT_NAME) python manage.py migrate
 
 insert.dja:
-	docker cp ../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
-	docker cp ../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/$(PROJ_NAME)
-	docker cp ../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/$(APP_NAME_1)
-	docker cp ../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/$(APP_NAME_2)
-	docker cp ../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/$(APP_NAME_3)
+	docker cp ../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/
+	docker cp ../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/
+# docker cp ../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
+# docker cp ../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/$(APP_NAME_1)
+# docker cp ../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/$(APP_NAME_3)
 
 eject.dja:
 	docker cp $(CONT_NAME):code/manage.py ../s_01_src/124dja_src/
