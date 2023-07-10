@@ -50,8 +50,8 @@ init.dev.dja: ## Initializing DRF devlopment containers.
 	make pipset.dja
 	make statprj.dja
 	make statapp.dja
-	make insert.dja
-	make migrate.dja
+	docker cp ../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/
+	docker cp ../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/
 	make eject.dja
 	make run.dja
 
@@ -84,9 +84,9 @@ migrate.dja:
 insert.dja:
 	docker cp ../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/
 	docker cp ../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/
-# docker cp ../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
-# docker cp ../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/$(APP_NAME_1)
-# docker cp ../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/$(APP_NAME_3)
+	docker cp ../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
+	docker cp ../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/
+	docker cp ../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/
 
 eject.dja:
 	docker cp $(CONT_NAME):code/manage.py ../s_01_src/124dja_src/
