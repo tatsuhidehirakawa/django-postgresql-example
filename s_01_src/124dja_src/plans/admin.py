@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import OfferList
+from .models import OfferListModel
 
-admin.site.register(OfferList)
+admin.site.register(OfferListModel)

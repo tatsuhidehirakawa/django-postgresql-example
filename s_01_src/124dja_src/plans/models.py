@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class OfferList(models.Model):
+class OfferListModel(models.Model):
     # オファー台帳（catalog）
     offer_id = models.CharField(verbose_name="オファーID", max_length=64, primary_key=True)
     account_id = models.CharField(verbose_name="ユーザID", max_length=64)

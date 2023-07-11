@@ -16,15 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import include             # <- Initial changing.
-from rest_framework import routers, serializers, viewsets
-from plans import views
-
-router = routers.DefaultRouter()                 # <- Initial changing.
-
-router.register(r'plans', views.PlansViewSet)
+from django.conf.urls import include
 
 urlpatterns = [
-    path('api/v1/', include(router.urls)),       # <- Initial changing.
+    path('api/v1/plans/', include('plans.urls')),
     path('admin/', admin.site.urls),
 ]
