@@ -12,7 +12,7 @@ init.dev: ## Initializing only frontend devlopment containers.
 	make init.dev.wbs
 	@echo "Succeful initializing devlopment environment!"
 
-#---[ 2. System booting ]---------------------------------------------------
+#---[ 2. System boot ]------------------------------------------------------
 
 boot.dev:
 	make boot.dev.dbs
