@@ -36,12 +36,7 @@ init.dev.dbs: ## Booting only frontend devlopment containers.
 
 #---[ 5. system booting ]-----------------------------------------------
 
-boot.dev.dbs: ## Booting only frontend devlopment containers.
-	docker compose --env-file ../dev.env up 134dbs_dev -d
 
-boot.dev.wbs: ## Initilazing only frontend devlopment containers.
-	docker compose --env-file ../dev.env up 110wbs_dev -d
-	@make init.tailwindcss
 
 set.code.dev:
 	@make insert.data.dbs
