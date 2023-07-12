@@ -4,42 +4,50 @@ WEB_CONT:=110wbs_dev
 API_CONT:=124dja_dev
 DBS_CONT:=134dbs_dev
 
-#---[ 1. system initialize ]-----------------------------------------------
+#---[ 1. System initialize ]-----------------------------------------------
 
 init.dev: ## Initializing only frontend devlopment containers.
 	make init.dev.dbs
 	make init.dev.api
 	make init.dev.wbs
-	echo "Succeful initializing devlopment environment!"
+	@echo "Succeful initializing devlopment environment!"
 
-#---[ 2. system booting ]---------------------------------------------------
+#---[ 2. System booting ]---------------------------------------------------
 
 boot.dev:
 	make boot.dev.dbs
 	make boot.dev.dja
 	make boot.dev.wbs	
-	echo "Succeful booting devlopment environment!"
+	@echo "Succeful booting devlopment environment!"
 
-#---[ 2. Web Container(110wbs_dev) Manipulation ]---------------------------
+#---[ 2. Container Manipulation ]------------------------------------------
 
-boot.dev.wbs: ## Booting only frontend devlopment containers.
+boot.dev.wbs: ## Booting Webserver devlopment containers.
 	cd $(WEB_CONT) && make boot.dev.wbs
 
-init.dev.wbs: ## Initilazing only frontend devlopment containers.
+init.dev.wbs: ## Initilazing Webserver devlopment containers.
 	cd $(WEB_CONT) && make init.dev.wbs
 
-boot.dev.api: ## Booting  Django devlopment containers.
+boot.dev.api: ## Booting DRF devlopment containers.
 	cd $(API_CONT) && make boot.dev.dja
 
 init.dev.api: ## Initializing DRF devlopment containers.
 	cd $(API_CONT) && make init.dev.dja
 
-init.dev.dbs: ## Booting only frontend devlopment containers.
+boot.dev.dbs: ## Booting DBserver devlopment containers.
 	cd $(DBS_CONT) && make init.dev.dbs
 
-#---[ 5. system booting ]-----------------------------------------------
+init.dev.dbs: ## Initializing DBserver devlopment containers.
+	cd $(DBS_CONT) && make init.dev.dbs
 
 
+
+
+
+
+
+
+#--------------------------------------------------------------------------
 
 set.code.dev:
 	@make insert.data.dbs

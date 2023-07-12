@@ -1,6 +1,6 @@
 #.PHONY:
 
-CONT_NAME:=124dja_dev
+API_CONT:=124dja_dev
 PROJ_NAME:=config
 APP_NAME_1:=users
 APP_NAME_2:=plans
@@ -21,50 +21,50 @@ init.dev.dja: ## Initializing DRF devlopment containers.
 	make pipset.dja
 	make statprj.dja
 	make statapp.dja
-	docker cp ../../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/
+	docker cp ../../s_01_src/124dja_src/$(PROJ_NAME) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_2) $(API_CONT):code/
 	make eject.dja
 	make run.dja
 
 createuser.dja:
-	docker exec -it $(CONT_NAME) python manage.py createsuperuser --email $(E_MAIL) --username $(USER_NAME)
+	docker exec -it $(API_CONT) python manage.py createsuperuser --email $(E_MAIL) --username $(USER_NAME)
 
 contup.dja:
-	cd .. && docker compose --env-file ../dev.env up $(CONT_NAME) -d
+	cd .. && docker compose --env-file ../dev.env up $(API_CONT) -d
 
 run.dja:
-	docker exec -it $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
+	docker exec -itd $(API_CONT) python manage.py runserver 0.0.0.0:8000
 
 pipset.dja:
-	docker cp ../$(CONT_NAME)/requirements.txt $(CONT_NAME):code
-	docker exec -it $(CONT_NAME) pip install --upgrade pip
-	docker exec -it $(CONT_NAME) pip install -r requirements.txt
+	docker cp ../$(API_CONT)/requirements.txt $(API_CONT):code
+	docker exec -it $(API_CONT) pip install --upgrade pip
+	docker exec -it $(API_CONT) pip install -r requirements.txt
 
 statprj.dja:
-	docker exec -it $(CONT_NAME) django-admin startproject $(PROJ_NAME) .
+	docker exec -it $(API_CONT) django-admin startproject $(PROJ_NAME) .
 
 statapp.dja:
-	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_1)
-	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_2)
-	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_3)
+	docker exec -it $(API_CONT) python manage.py startapp $(APP_NAME_1)
+	docker exec -it $(API_CONT) python manage.py startapp $(APP_NAME_2)
+	docker exec -it $(API_CONT) python manage.py startapp $(APP_NAME_3)
 
 migrate.dja:
-	docker exec -it $(CONT_NAME) python manage.py makemigrations
-	docker exec -it $(CONT_NAME) python manage.py migrate
+	docker exec -it $(API_CONT) python manage.py makemigrations
+	docker exec -it $(API_CONT) python manage.py migrate
 
 insert.dja:
-	docker cp ../../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/
+	docker cp ../../s_01_src/124dja_src/$(PROJ_NAME) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_2) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/manage.py $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_1) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_3) $(API_CONT):code/
 
 eject.dja:
-	docker cp $(CONT_NAME):code/manage.py ../../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(PROJ_NAME)/ ../../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(APP_NAME_1) ../../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(APP_NAME_2) ../../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(APP_NAME_3) ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/manage.py ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/$(PROJ_NAME)/ ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/$(APP_NAME_1) ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/$(APP_NAME_2) ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/$(APP_NAME_3) ../../s_01_src/124dja_src/
 
 drfver:
 	docker exec -it 124dja_dev pip show djangorestframework
