@@ -8,7 +8,7 @@ const Nukes = () => {
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <p>
-        Welcome to the "<code>STGprd_devpkg</code>" - Ver 0.3.0.0
+        Welcome to the "<code>django-react-postgresql-example</code>" - Ver 0.4.0.0
       </p>
       <Link to="/SiteTop" className="App-link">View Package Summary</Link>
     </header>

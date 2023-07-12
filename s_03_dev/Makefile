@@ -22,13 +22,16 @@ boot.dev:
 
 #---[ 2. Web Container(110wbs_dev) Manipulation ]---------------------------
 
+boot.dev.wbs: ## Booting only frontend devlopment containers.
+	cd $(WEB_CONT) && make boot.dev.wbs
+
 init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	cd $(WEB_CONT) && make init.dev.wbs
 
-boot.dev.dja: ## Booting  Django devlopment containers.
+boot.dev.api: ## Booting  Django devlopment containers.
 	cd $(API_CONT) && make boot.dev.dja
 
-init.dev.dja: ## Initializing DRF devlopment containers.
+init.dev.api: ## Initializing DRF devlopment containers.
 	cd $(API_CONT) && make init.dev.dja
 
 init.dev.dbs: ## Booting only frontend devlopment containers.
