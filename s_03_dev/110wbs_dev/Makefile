@@ -4,19 +4,19 @@
 
 WEB_CONT:=110wbs_dev
 
-#---[ 2. System boot ]-----------------------------------------------------
-
-boot.dev.wbs: ## Initilazing only frontend devlopment containers.
-	make init.dev.wbs
-	make insert.code.wbs
-
-#---[ 3. System initialize ]-----------------------------------------------
+#---[ 2. System initialize ]-----------------------------------------------
 
 init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	cd .. && docker compose --env-file ../dev.env up $(WEB_CONT) -d
 	make init.tailwindcss
 	make insert.code.wbs
 	make eject.data.wbs
+
+#---[ 3. System boot ]-----------------------------------------------------
+
+boot.dev.wbs: ## Initilazing only frontend devlopment containers.
+	make init.dev.wbs
+	make insert.code.wbs
 
 #---[ 4. Container Manipulation ]------------------------------------------
 

@@ -12,15 +12,7 @@ APP_NAME_3:=blog
 E_MAIL:=admin@example.com
 USER_NAME:=admin
 
-#---[ 2. System boot ]-----------------------------------------------------
-
-boot.dev.dja: ## Booting  Django devlopment containers.
-	make contup.dja
-	make pipset.dja
-	make insert.dja
-	make run.dja
-
-#---[ 3. System initialize ]-----------------------------------------------
+#---[ 2. System initialize ]-----------------------------------------------
 
 init.dev.dja: ## Initializing DRF devlopment containers.
 	make contup.dja
@@ -30,6 +22,14 @@ init.dev.dja: ## Initializing DRF devlopment containers.
 	docker cp ../../s_01_src/124dja_src/$(PROJ_NAME) $(API_CONT):code/
 	docker cp ../../s_01_src/124dja_src/$(APP_NAME_2) $(API_CONT):code/
 	make eject.dja
+	make run.dja
+
+#---[ 3. System boot ]-----------------------------------------------------
+
+boot.dev.dja: ## Booting  Django devlopment containers.
+	make contup.dja
+	make pipset.dja
+	make insert.dja
 	make run.dja
 
 #---[ 4. Container Manipulation ]------------------------------------------
