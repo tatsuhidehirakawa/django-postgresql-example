@@ -9,7 +9,6 @@ boot.dev.wbs: ## Initilazing only frontend devlopment containers.
 init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	cd .. && docker compose --env-file ../dev.env up $(CONT_NAME) -d
 	make init.tailwindcss
-	eject.data.wbs
 
 init.tailwindcss:
 	@docker container exec -it $(CONT_NAME) npm install -D tailwindcss@3.2.4 postcss@8.4.19 autoprefixer@10.4.13
