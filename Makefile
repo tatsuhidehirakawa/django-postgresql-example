@@ -1,23 +1,23 @@
 #.PHONY:
 
+#---[ 1. Env params ]------------------------------------------------------
 
-#---[ 1. system boot ]-------------------------------------------------------
 
-init.all: ## Initialize and booting all containers and services.
-	make init.dev
-	make init.tst
-	# make init.stg
 
-init.dev: ## Booting only frontend devlopment containers.
-	cd s_03_dev && make init.dev.dja
+#---[ 2. System boot ]-----------------------------------------------------
 
-init.tst: ## Booting only backend testing containers.
-	cd s_05_tst && make init.tst
+boot.all: ## booting all containers and services.
+	cd s_03_dev && make boot.dev
 
-init.stg: ## Booting only backend staging containers.
-	cd s_06_tst && make init.stg
+#---[ 3. System initialize ]-----------------------------------------------
 
-#---[ 3. Tst env boot ]------------------------------------------------
+init.all: ## Initializing all containers and services.
+	cd s_03_dev && make init.dev
 
-drfver:
-	cd s_03_dev && make drfver
+#---[ 4. Container Manipulation ]------------------------------------------
+
+
+
+#---[ 5. Others ]----------------------------------------------------------
+
+

@@ -1,18 +1,12 @@
 #.PHONY:
 
+#---[ 1. Env params ]------------------------------------------------------
+
 WEB_CONT:=110wbs_dev
 API_CONT:=124dja_dev
 DBS_CONT:=134dbs_dev
 
-#---[ 1. System initialize ]-----------------------------------------------
-
-init.dev: ## Initializing only frontend devlopment containers.
-	make init.dev.dbs
-	make init.dev.api
-	make init.dev.wbs
-	@echo "Succeful initializing devlopment environment!"
-
-#---[ 2. System boot ]------------------------------------------------------
+#---[ 2. System boot ]-----------------------------------------------------
 
 boot.dev:
 	make boot.dev.dbs
@@ -20,7 +14,15 @@ boot.dev:
 	make boot.dev.wbs	
 	@echo "Succeful booting devlopment environment!"
 
-#---[ 2. Container Manipulation ]------------------------------------------
+#---[ 3. System initialize ]-----------------------------------------------
+
+init.dev: ## Initializing only frontend devlopment containers.
+	make init.dev.dbs
+	make init.dev.api
+	make init.dev.wbs
+	@echo "Succeful initializing devlopment environment!"
+
+#---[ 4. Container Manipulation ]------------------------------------------
 
 boot.dev.wbs: ## Booting Webserver devlopment containers.
 	cd $(WEB_CONT) && make boot.dev.wbs
@@ -40,14 +42,7 @@ boot.dev.dbs: ## Booting DBserver devlopment containers.
 init.dev.dbs: ## Initializing DBserver devlopment containers.
 	cd $(DBS_CONT) && make init.dev.dbs
 
-
-
-
-
-
-
-
-#--------------------------------------------------------------------------
+#---[ 5. Others ]----------------------------------------------------------
 
 set.code.dev:
 	@make insert.data.dbs
