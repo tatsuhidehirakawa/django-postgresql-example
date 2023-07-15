@@ -27,11 +27,10 @@ pg_restore: ## Restore by local file.(cf."make pg_restore container_name=130dbs_
 
 #---[ 5. Others ]----------------------------------------------------------
 
-rplccrlf:
-	docker exec 134dbs_dev /bin/sh -c "sed -i 's/\r//' /usr/src/dbstore/*.sh"
-
 lookcrlf:
 	docker exec 134dbs_dev /bin/sh -c "cat -e /usr/src/dbstore/*.sh"
 
+rplccrlf:
+	docker exec 134dbs_dev /bin/sh -c "sed -i 's/\r//' /usr/src/dbstore/*.sh"
 
 
