@@ -2,9 +2,7 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-WEB_CONT:=110wbs_dev
-API_CONT:=124dja_dev
-DBS_CONT:=134dbs_dev
+
 
 #---[ 2. System initialize ]-----------------------------------------------
 
@@ -25,22 +23,22 @@ boot.dev:
 #---[ 4. Container Manipulation ]------------------------------------------
 
 boot.dev.wbs: ## Booting Webserver devlopment containers.
-	cd $(WEB_CONT) && make boot.dev.wbs
+	cd 110wbs_dev && make boot.dev.wbs
 
 init.dev.wbs: ## Initilazing Webserver devlopment containers.
-	cd $(WEB_CONT) && make init.dev.wbs
+	cd 110wbs_dev && make init.dev.wbs
 
 boot.dev.api: ## Booting DRF devlopment containers.
-	cd $(API_CONT) && make boot.dev.dja
+	cd 124dja_dev && make boot.dev.dja
 
 init.dev.api: ## Initializing DRF devlopment containers.
-	cd $(API_CONT) && make init.dev.dja
+	cd 124dja_dev && make init.dev.dja
 
 boot.dev.dbs: ## Booting DBserver devlopment containers.
-	cd $(DBS_CONT) && make init.dev.dbs
+	cd 134dbs_dev && make init.dev.dbs
 
 init.dev.dbs: ## Initializing DBserver devlopment containers.
-	cd $(DBS_CONT) && make init.dev.dbs
+	cd 134dbs_dev && make init.dev.dbs
 
 #---[ 5. Others ]----------------------------------------------------------
 
@@ -68,5 +66,3 @@ ddd:
 ccc:
 	docker container ls -a; docker system df; docker stop $(docker ps -q); docker volume rm $(docker volume ls -qf dangling=true); docker container prune -f; docker image prune -a -f; docker builder prune -f; docker images -a -f; docker container ls -a; docker system df
 
-insert.data.dbs:
-	@docker exec -it 134dbs_dev /usr/src/dbstore/pg_restore.sh backup_20221217215050_134dbs_dev.sql bash
