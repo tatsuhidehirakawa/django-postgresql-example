@@ -12,7 +12,7 @@ init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	cd .. && docker compose --env-file $(ENV_LOC) up $(WEB_CONT) -d
 	make init.tailwindcss
 	make insert.code.wbs
-	make eject.data.wbs
+	make eject.code.wbs
 
 #---[ 3. System boot ]-----------------------------------------------------
 
@@ -34,9 +34,9 @@ insert.code.wbs:
 	@docker cp ../../s_01_src/$(WEB_SRC)/src $(WEB_CONT):usr/src/app
 
 eject.code.wbs:
-	docker cp 110wbs_dev:usr/src/app/public ../../s_01_src/$(WEB_SRC)/
-	docker cp 110wbs_dev:usr/src/app/src ../../s_01_src/$(WEB_SRC)/
-	docker cp 110wbs_dev:usr/src/app/package.json ../../s_01_src/$(WEB_SRC)/
+	docker cp $(WEB_CONT):usr/src/app/public ../../s_01_src/$(WEB_SRC)/
+	docker cp $(WEB_CONT):usr/src/app/src ../../s_01_src/$(WEB_SRC)/
+	docker cp $(WEB_CONT):usr/src/app/package.json ../../s_01_src/$(WEB_SRC)/
 
 #---[ 5. Others ]----------------------------------------------------------
 
