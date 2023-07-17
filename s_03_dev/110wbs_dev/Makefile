@@ -16,8 +16,9 @@ init.dev.wbs: ## Initilazing only frontend devlopment containers.
 
 #---[ 3. System boot ]-----------------------------------------------------
 
-boot.dev.wbs: ## Initilazing only frontend devlopment containers.
-	make init.dev.wbs
+boot.dev.wbs: ## Booting only frontend devlopment containers.
+	cd .. && docker compose --env-file $(ENV_LOC) up $(WEB_CONT) -d
+	make init.tailwindcss
 	make insert.code.wbs
 
 #---[ 4. Container Manipulation ]------------------------------------------
