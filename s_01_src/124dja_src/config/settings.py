@@ -13,6 +13,8 @@ import os                                        # <- For envs.
 from pathlib import Path
 from dotenv import load_dotenv                   # <- For envs.
 
+from datetime import timedelta                      # <- For jwt.
+
 load_dotenv()                                    # <- For envs.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',                            # <- Initial changing.
+    'users',                                     # <- add for jwt
     'plans',
 ]
 
@@ -142,4 +145,10 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'users.authentication.JWTAuthentication',        # <- add for jwt
+    )
+}
+JWT_CONF = {
+    'TOKEN_LIFETIME_HOURS': 1,                          # <- add for jwt
 }
