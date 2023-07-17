@@ -2,7 +2,9 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-
+WEB_CONT:=110wbs_dev
+API_CONT:=124dja_dev
+DBS_CONT:=134dbs_dev
 
 #---[ 2. System initialize ]-----------------------------------------------
 
@@ -16,29 +18,29 @@ init.dev: ## Initializing only frontend devlopment containers.
 
 boot.dev:
 	make boot.dev.dbs
-	make boot.dev.dja
+	make boot.dev.api
 	make boot.dev.wbs	
 	@echo "Succeful booting devlopment environment!"
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
 boot.dev.wbs: ## Booting Webserver devlopment containers.
-	cd 110wbs_dev && make boot.dev.wbs
+	cd $(WEB_CONT) && make boot.dev.wbs
 
 init.dev.wbs: ## Initilazing Webserver devlopment containers.
-	cd 110wbs_dev && make init.dev.wbs
+	cd $(WEB_CONT) && make init.dev.wbs
 
 boot.dev.api: ## Booting DRF devlopment containers.
-	cd 124dja_dev && make boot.dev.dja
+	cd $(API_CONT) && make boot.dev.dja
 
 init.dev.api: ## Initializing DRF devlopment containers.
-	cd 124dja_dev && make init.dev.dja
+	cd $(API_CONT) && make init.dev.dja
 
 boot.dev.dbs: ## Booting DBserver devlopment containers.
-	cd 134dbs_dev && make init.dev.dbs
+	cd $(DBS_CONT) && make init.dev.dbs
 
 init.dev.dbs: ## Initializing DBserver devlopment containers.
-	cd 134dbs_dev && make init.dev.dbs
+	cd $(DBS_CONT) && make init.dev.dbs
 
 #---[ 5. Others ]----------------------------------------------------------
 
