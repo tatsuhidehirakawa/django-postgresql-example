@@ -8,7 +8,7 @@ ENV_LOC:=../dev.env
 PROJ_NAME:=config
 APP_NAME_1:=users
 APP_NAME_2:=plans
-APP_NAME_3:=blog
+# APP_NAME_3:=blog
 # APP_NAME_4:=
 # APP_NAME_5:=
 
@@ -23,6 +23,7 @@ init.dev.dja: ## Initializing DRF devlopment containers.
 	make statprj.dja
 	make statapp.dja
 	docker cp ../../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/
 	docker cp ../../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/
 	make eject.dja
 	make run.dja
@@ -57,7 +58,6 @@ statprj.dja:
 statapp.dja:
 	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_1)
 	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_2)
-	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_3)
 
 migrate.dja:
 	docker exec -it $(CONT_NAME) python manage.py makemigrations
@@ -65,17 +65,15 @@ migrate.dja:
 
 insert.dja:
 	docker cp ../../s_01_src/124dja_src/$(PROJ_NAME) $(CONT_NAME):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/
 	docker cp ../../s_01_src/124dja_src/$(APP_NAME_2) $(CONT_NAME):code/
 	docker cp ../../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_1) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_3) $(CONT_NAME):code/
 
 eject.dja:
 	docker cp $(CONT_NAME):code/manage.py ../../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(PROJ_NAME)/ ../../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(APP_NAME_1) ../../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(APP_NAME_2) ../../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(APP_NAME_3) ../../s_01_src/124dja_src/
 
 #---[ 5. Others ]----------------------------------------------------------
 

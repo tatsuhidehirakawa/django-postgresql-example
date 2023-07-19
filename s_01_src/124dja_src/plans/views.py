@@ -5,7 +5,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import OfferListSerializer
 from .models import OfferListModel
-
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
 
 def get_object(pk):
     try:
@@ -15,6 +16,7 @@ def get_object(pk):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get(request):
     if request.query_params:
         items = OfferListModel.objects.filter(**request.query_params.dict())
