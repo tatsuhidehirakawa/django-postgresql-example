@@ -31,10 +31,10 @@ init.dev.wbs: ## Initilazing Webserver devlopment containers.
 	cd $(WEB_CONT) && make init.dev.wbs
 
 boot.dev.api: ## Booting DRF devlopment containers.
-	cd $(API_CONT) && make boot.dev.dja
+	cd $(API_CONT) && make boot.dev.api
 
 init.dev.api: ## Initializing DRF devlopment containers.
-	cd $(API_CONT) && make init.dev.dja
+	cd $(API_CONT) && make init.dev.api
 
 boot.dev.dbs: ## Booting DBserver devlopment containers.
 	cd $(DBS_CONT) && make init.dev.dbs

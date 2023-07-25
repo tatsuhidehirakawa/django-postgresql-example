@@ -17,7 +17,7 @@ USER_NAME:=admin
 
 #---[ 2. System initialize ]-----------------------------------------------
 
-init.dev.dja: ## Initializing DRF devlopment containers.
+init.dev.api: ## Initializing DRF devlopment containers.
 	make contup.dja
 	make pipset.dja
 	make statprj.dja
@@ -30,7 +30,7 @@ init.dev.dja: ## Initializing DRF devlopment containers.
 
 #---[ 3. System boot ]-----------------------------------------------------
 
-boot.dev.dja: ## Booting  Django devlopment containers.
+boot.dev.api: ## Booting  Django devlopment containers.
 	make contup.dja
 	make pipset.dja
 	make insert.dja
@@ -77,7 +77,7 @@ eject.dja:
 
 #---[ 5. Others ]----------------------------------------------------------
 
-drfver:
+drfver: ## Command for checking DRF version.
 	docker exec -it 124dja_dev pip show djangorestframework
 
 
