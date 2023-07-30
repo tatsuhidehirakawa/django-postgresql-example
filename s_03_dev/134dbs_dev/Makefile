@@ -3,6 +3,8 @@
 #---[ 1. Env params ]------------------------------------------------------
 
 CONT_NAME:=134dbs_dev
+VOLUME_NAME=s_03_dev_dbs-vol
+IMAGE_NAME:=piostgres
 ENV_LOC:=../dev.env
 # BKUP_FILE:=backup_20221217215050_134dbs_dev.sql
 BKUP_FILE:=backup_20230725104542_134dbs_dev.sql
@@ -32,6 +34,17 @@ pg_restore: ## Restore by local file.(cf."make pg_restore container_name=130dbs_
 
 #---[ 5. Others ]----------------------------------------------------------
 
+purge:
+	docker container ls -a
+	docker system df
+	docker stop $(CONT_NAME)
+	docker rm $(CONT_NAME)
+	docker volume rm $(VOLUME_NME)
+	docker images rm $(IMAGE_NAME)
+	docker system df
+
+#---[ 6. Others ]----------------------------------------------------------
+
 lookcrlf:
 	docker exec $(CONT_NAME) /bin/sh -c "cat -e /usr/src/dbstore/*.sh"
 
@@ -39,3 +52,6 @@ rplccrlf:
 	docker exec $(CONT_NAME) /bin/sh -c "sed -i 's/\r//' /usr/src/dbstore/*.sh"
 
 
+	docker container prune -f
+	docker image prune -a -f
+	docker builder prune -f
