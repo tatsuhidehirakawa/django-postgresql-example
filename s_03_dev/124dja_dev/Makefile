@@ -6,6 +6,8 @@ API_CONT:=124dja_dev
 API_VOLUME:=s_03_dev_api-vol
 API_IMAGE:=s_03_dev-124dja_dev
 
+WBS_VOLUME:=s_03_dev_wbs-vol
+
 ENV_LOC:=../dev.env
 
 PRJ_NAME_01:=config
@@ -35,6 +37,7 @@ init.dev.api: ## Initializing DRF devlopment containers.
 	docker cp ../../s_01_src/124dja_src/$(APP_NAME_11) $(API_CONT):code/
 	make eject.dja
 	make run.dja
+	docker volume rm $(WBS_VOLUME)
 
 #---[ 3. System boot ]-----------------------------------------------------
 
@@ -43,6 +46,7 @@ boot.dev.api: ## Booting  Django devlopment containers.
 	make pipset.dja
 	make insert.dja
 	make run.dja
+	docker volume rm $(WBS_VOLUME)
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
