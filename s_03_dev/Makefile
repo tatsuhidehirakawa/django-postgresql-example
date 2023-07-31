@@ -14,6 +14,15 @@ init.dev: ## Initializing only frontend devlopment containers.
 	make init.dev.wbs
 	@echo "Succeful initializing devlopment environment!"
 
+init.dev.wbs: ## Initilazing Webserver devlopment containers.
+	cd $(WEB_CONT) && make init.dev.wbs
+
+init.dev.api: ## Initializing DRF devlopment containers.
+	cd $(API_CONT) && make init.dev.api
+
+init.dev.dbs: ## Initializing DBserver devlopment containers.
+	cd $(DBS_CONT) && make init.dev.dbs
+
 #---[ 3. System boot ]-----------------------------------------------------
 
 boot.dev:
@@ -22,45 +31,36 @@ boot.dev:
 	make boot.dev.wbs	
 	@echo "Succeful booting devlopment environment!"
 
-#---[ 4. Container Manipulation ]------------------------------------------
-
 boot.dev.wbs: ## Booting Webserver devlopment containers.
 	cd $(WEB_CONT) && make boot.dev.wbs
-
-init.dev.wbs: ## Initilazing Webserver devlopment containers.
-	cd $(WEB_CONT) && make init.dev.wbs
 
 boot.dev.api: ## Booting DRF devlopment containers.
 	cd $(API_CONT) && make boot.dev.api
 
-init.dev.api: ## Initializing DRF devlopment containers.
-	cd $(API_CONT) && make init.dev.api
-
 boot.dev.dbs: ## Booting DBserver devlopment containers.
 	cd $(DBS_CONT) && make init.dev.dbs
 
-init.dev.dbs: ## Initializing DBserver devlopment containers.
-	cd $(DBS_CONT) && make init.dev.dbs
+#---[ 4. Container Manipulation ]------------------------------------------
 
-#---[ 5. Others ]----------------------------------------------------------
 
-set.code.dev:
-	@make insert.data.dbs
-	@make insert.code.wbs
 
-API_IMAGE:=s_03_dev-124dja_dev
+#---[ 5. purge Container ]-------------------------------------------------
 
-purge.api.cont:
-	# docker container ls -a
-	# docker system df
-	# docker stop $(CONT_NAME)
-	docker volume rm $(API_IMAGE)
-	# docker container prune -f
-	# docker image prune -a -f
-	# docker builder prune -f
-	# docker images -a -f
-	# docker container ls -a
-	# docker system df
+purge.dev:
+	make purge.dev.wbs
+	make purge.dev.api
+	make purge.dev.dbs
+
+purge.dev.wbs:
+	cd $(WEB_CONT) && make purge.dev.wbs
+
+purge.dev.api:
+	cd $(API_CONT) && make purge.dev.api
+
+purge.dev.dbs:
+	cd $(DBS_CONT) && make purge.dev.dbs
+
+#---[ 6. Other Commands ]--------------------------------------------------
 
 ddd:
 	docker image prune -a -f

@@ -39,6 +39,17 @@ eject.code.wbs:
 	docker cp $(WEB_CONT):usr/src/app/src ../../s_01_src/$(WEB_SRC)/
 	docker cp $(WEB_CONT):usr/src/app/package.json ../../s_01_src/$(WEB_SRC)/
 
-#---[ 5. Others ]----------------------------------------------------------
+#---[ 5. Purge Container ]-------------------------------------------------
+
+purge.dev.wbs:
+	docker container ls -a
+	docker system df
+	docker stop $(CONT_NAME)
+	docker rm $(CONT_NAME)
+	docker volume rm $(VOLUME_NAME)
+	docker images rmi $(IMAGE_NAME)
+	docker system df
+
+#---[ 6. Other Commands ]--------------------------------------------------
 
 

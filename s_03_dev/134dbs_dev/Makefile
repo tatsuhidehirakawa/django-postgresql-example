@@ -33,18 +33,18 @@ pg_restore: ## Restore by local file.(cf."make pg_restore container_name=130dbs_
 	make rplccrlf
 	@docker exec -it "$(CONT_NAME)" /usr/src/dbstore/pg_restore.sh "$(BKUP_FILE)" bash
 
-#---[ 5. Others ]----------------------------------------------------------
+#---[ 5. Purge Container ]-------------------------------------------------
 
-purge:
+purge.dev.dbs:
 	docker container ls -a
 	docker system df
 	docker stop $(CONT_NAME)
 	docker rm $(CONT_NAME)
 	docker volume rm $(VOLUME_NAME)
-	docker images rm $(IMAGE_NAME)
+	docker images rmi $(IMAGE_NAME)
 	docker system df
 
-#---[ 6. Others ]----------------------------------------------------------
+#---[ 6. Other Commands ]--------------------------------------------------
 
 lookcrlf:
 	docker exec $(CONT_NAME) /bin/sh -c "cat -e /usr/src/dbstore/*.sh"

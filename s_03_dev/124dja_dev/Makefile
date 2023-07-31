@@ -82,18 +82,18 @@ eject.dja:
 	docker cp $(CONT_NAME):code/$(APP_NAME_01) ../../s_01_src/124dja_src/
 	docker cp $(CONT_NAME):code/$(APP_NAME_11) ../../s_01_src/124dja_src/
 
-#---[ 5. Others ]----------------------------------------------------------
+#---[ 5. Purge Container ]-------------------------------------------------
 
-purge:
+purge.dev.api:
 	docker container ls -a
 	docker system df
 	docker stop $(CONT_NAME)
 	docker rm $(CONT_NAME)
 	docker volume rm $(VOLUME_NAME)
-	docker images rm $(IMAGE_NAME)
+	docker images rmi $(IMAGE_NAME)
 	docker system df
 
-#---[ 5. Others ]----------------------------------------------------------
+#---[ 6. Other Commands ]--------------------------------------------------
 
 drfver: ## Command for checking DRF version.
 	docker exec -it 124dja_dev pip show djangorestframework
