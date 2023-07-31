@@ -22,7 +22,8 @@ create table purchase_histroy (
   , payee_account_id character varying not null
   , amount numeric not null
   , create_date timestamp(6) without time zone not null
-  , update_date timestamp(6) without time zone not null
+  -- , update_date timestamp(6) without time zone not null
+  , update_date timestamp(6) without time zone
   , constraint purchase_histroy_PKC primary key (purchase_id,payer_account_id,payee_account_id)
 ) ;
 
@@ -39,7 +40,8 @@ create table account_attribute (
   , rate character varying
   , status character varying(1)
   , create_date timestamp(6) without time zone not null
-  , update_date timestamp(6) without time zone not null
+  -- , update_date timestamp(6) without time zone not null
+  , update_date timestamp(6) without time zone
   , constraint account_attribute_PKC primary key (account_id)
 ) ;
 
@@ -56,7 +58,8 @@ create table account_master (
   , language character varying not null
   , registration_date timestamp(6) without time zone not null
   , create_date timestamp(6) without time zone not null
-  , update_date timestamp(6) without time zone not null
+  -- , update_date timestamp(6) without time zone not null
+  , update_date timestamp(6) without time zone
   , constraint account_master_PKC primary key (account_id)
 ) ;
 
@@ -73,7 +76,8 @@ create table offer_list (
   , offer_status character varying(1) not null
   , offer_text character varying(140) not null
   , create_date timestamp(6) without time zone not null
-  , update_date timestamp(6) without time zone not null
+  -- , update_date timestamp(6) without time zone not null
+  , update_date timestamp(6) without time zone
   , constraint offer_list_PKC primary key (offer_id,account_id)
 ) ;
 
