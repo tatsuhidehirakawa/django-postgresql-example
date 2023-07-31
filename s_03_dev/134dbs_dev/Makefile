@@ -4,7 +4,7 @@
 
 CONT_NAME:=134dbs_dev
 VOLUME_NAME=s_03_dev_dbs-vol
-IMAGE_NAME:=piostgres
+IMAGE_NAME:=postgres
 
 ENV_LOC:=../dev.env
 # BKUP_FILE:=backup_20221217215050_134dbs_dev.sql
@@ -40,7 +40,7 @@ purge:
 	docker system df
 	docker stop $(CONT_NAME)
 	docker rm $(CONT_NAME)
-	docker volume rm $(VOLUME_NME)
+	docker volume rm $(VOLUME_NAME)
 	docker images rm $(IMAGE_NAME)
 	docker system df
 

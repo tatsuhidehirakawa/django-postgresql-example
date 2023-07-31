@@ -89,7 +89,7 @@ purge:
 	docker system df
 	docker stop $(CONT_NAME)
 	docker rm $(CONT_NAME)
-	docker volume rm $(VOLUME_NME)
+	docker volume rm $(VOLUME_NAME)
 	docker images rm $(IMAGE_NAME)
 	docker system df
 
