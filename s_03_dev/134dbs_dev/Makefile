@@ -2,10 +2,7 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-DBS_CONT:=134dbs_dev
-DBS_VOLUME=s_03_dev_dbs-vol
-DBS_IMAGE:=postgres:14
-
+include ../../dev.env
 ENV_LOC:=../dev.env
 
 BKUP_FILE:=backup_20230731214606_134dbs_dev.sql

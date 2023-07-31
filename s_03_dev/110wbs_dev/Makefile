@@ -2,12 +2,7 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-WEB_CONT:=110wbs_dev
-WBS_VOLUME:=s_03_dev_wbs-vol
-WBS_IMAGE:=s_03_dev-110wbs_dev
-
-WEB_SRC:=110wbs_src
-
+include ../../dev.env
 ENV_LOC:=../dev.env
 
 #---[ 2. System initialize ]-----------------------------------------------

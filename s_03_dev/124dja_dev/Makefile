@@ -2,16 +2,12 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-API_CONT:=124dja_dev
-API_VOLUME:=s_03_dev_api-vol
-API_IMAGE:=s_03_dev-124dja_dev
-
-WBS_VOLUME:=s_03_dev_wbs-vol
-
+include ../../dev.env
 ENV_LOC:=../dev.env
 
 PRJ_NAME_01:=config
 # PRJ_NAME_02:=
+
 APP_NAME_01:=users
 APP_NAME_02:=profiles
 # APP_NAME_03:=message
@@ -20,9 +16,6 @@ APP_NAME_11:=plans
 # APP_NAME_12:=
 # APP_NAME_98:=settings
 # APP_NAME_99:=systems
-
-E_MAIL:=admin@example.com
-USER_NAME:=admin
 
 #---[ 2. System initialize ]-----------------------------------------------
 
