@@ -2,9 +2,7 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-WEB_CONT:=110wbs_dev
-API_CONT:=124dja_dev
-DBS_CONT:=134dbs_dev
+include dev.env
 
 #---[ 2. System initialize ]-----------------------------------------------
 

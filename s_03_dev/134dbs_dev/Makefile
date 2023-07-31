@@ -2,8 +2,8 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-include ../../dev.env
-ENV_LOC:=../dev.env
+include ../dev.env
+ENV_LOC:=dev.env
 
 BKUP_FILE:=backup_20230731214606_134dbs_dev.sql
 # BKUP_FILE:=

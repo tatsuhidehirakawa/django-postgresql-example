@@ -2,8 +2,8 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-include ../../dev.env
-ENV_LOC:=../dev.env
+include ../dev.env
+ENV_LOC:=dev.env
 
 #---[ 2. System initialize ]-----------------------------------------------
 
