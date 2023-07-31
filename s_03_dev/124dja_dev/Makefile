@@ -31,6 +31,7 @@ init.dev.api: ## Initializing DRF devlopment containers.
 	make statapp.dja
 	docker cp ../../s_01_src/124dja_src/$(PRJ_NAME_01) $(API_CONT):code/
 	docker cp ../../s_01_src/124dja_src/$(APP_NAME_01) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_02) $(API_CONT):code/
 	docker cp ../../s_01_src/124dja_src/$(APP_NAME_11) $(API_CONT):code/
 	make eject.dja
 	make run.dja
@@ -64,6 +65,7 @@ statprj.dja:
 
 statapp.dja:
 	docker exec -it $(API_CONT) python manage.py startapp $(APP_NAME_01)
+	docker exec -it $(API_CONT) python manage.py startapp $(APP_NAME_02)
 	docker exec -it $(API_CONT) python manage.py startapp $(APP_NAME_11)
 
 migrate.dja:
@@ -73,6 +75,7 @@ migrate.dja:
 insert.dja:
 	docker cp ../../s_01_src/124dja_src/$(PRJ_NAME_01) $(API_CONT):code/
 	docker cp ../../s_01_src/124dja_src/$(APP_NAME_01) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_02) $(API_CONT):code/
 	docker cp ../../s_01_src/124dja_src/$(APP_NAME_11) $(API_CONT):code/
 	docker cp ../../s_01_src/124dja_src/manage.py $(API_CONT):code/
 
@@ -80,6 +83,7 @@ eject.dja:
 	docker cp $(API_CONT):code/manage.py ../../s_01_src/124dja_src/
 	docker cp $(API_CONT):code/$(PRJ_NAME_01)/ ../../s_01_src/124dja_src/
 	docker cp $(API_CONT):code/$(APP_NAME_01) ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/$(APP_NAME_02) ../../s_01_src/124dja_src/
 	docker cp $(API_CONT):code/$(APP_NAME_11) ../../s_01_src/124dja_src/
 
 #---[ 5. Purge Container ]-------------------------------------------------
