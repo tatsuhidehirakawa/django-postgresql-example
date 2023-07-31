@@ -4,7 +4,7 @@
 
 DBS_CONT:=134dbs_dev
 DBS_VOLUME=s_03_dev_dbs-vol
-DBS_IMAGE:=postgres
+DBS_IMAGE:=postgres:14
 
 ENV_LOC:=../dev.env
 # BKUP_FILE:=backup_20221217215050_134dbs_dev.sql
@@ -41,7 +41,7 @@ purge.dev.dbs:
 	docker stop $(DBS_CONT)
 	docker rm $(DBS_CONT)
 	docker volume rm $(DBS_VOLUME)
-	docker images rmi $(DBS_IMAGE)
+	docker image rm $(DBS_IMAGE)
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------

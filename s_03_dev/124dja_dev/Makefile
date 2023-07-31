@@ -90,7 +90,7 @@ purge.dev.api:
 	docker stop $(API_CONT)
 	docker rm $(API_CONT)
 	docker volume rm $(API_VOLUME)
-	docker images rmi $(API_IMAGE)
+	docker image rm $(API_IMAGE)
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------

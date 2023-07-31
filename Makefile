@@ -18,6 +18,23 @@ boot.all: ## booting all containers and services.
 
 
 
-#---[ 5. Others ]----------------------------------------------------------
+#---[ 5. Purge Container ]-------------------------------------------------
+
+purge:
+	make purge.dev
+	make purge.tst
+	make purge.stg
+	docker builder prune
+
+purge.dev:
+	cd s_03_dev && make purge.dev
+
+purge.tst:
+	cd s_05_tst && make purge.tst
+
+purge.stg:
+	cd s_07_stg && make purge.stg
+
+#---[ 6. Other Commands ]--------------------------------------------------
 
 

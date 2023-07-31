@@ -50,7 +50,7 @@ purge.dev.wbs:
 	docker stop $(WEB_CONT)
 	docker rm $(WEB_CONT)
 	docker volume rm $(WBS_VOLUME)
-	docker images rmi $(WBS_IMAGE)
+	docker image rm $(WBS_IMAGE)
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------
