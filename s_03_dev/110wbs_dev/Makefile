@@ -3,6 +3,9 @@
 #---[ 1. Env params ]------------------------------------------------------
 
 WEB_CONT:=110wbs_dev
+WBS_VOLUME:=s_03_dev_wbs-vol
+WBS_IMAGE:=s_03_dev-110wbs_dev
+
 WEB_SRC:=110wbs_src
 ENV_LOC:=../dev.env
 
@@ -44,10 +47,10 @@ eject.code.wbs:
 purge.dev.wbs:
 	docker container ls -a
 	docker system df
-	docker stop $(CONT_NAME)
-	docker rm $(CONT_NAME)
-	docker volume rm $(VOLUME_NAME)
-	docker images rmi $(IMAGE_NAME)
+	docker stop $(WEB_CONT)
+	docker rm $(WEB_CONT)
+	docker volume rm $(WBS_VOLUME)
+	docker images rmi $(WBS_IMAGE)
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------

@@ -2,9 +2,9 @@
 
 #---[ 1. Env params ]------------------------------------------------------
 
-CONT_NAME:=124dja_dev
-VOLUME_NAME=s_03_dev_api-vol
-# IMAGE_NAME:=piostgres
+API_CONT:=124dja_dev
+API_VOLUME:=s_03_dev_api-vol
+API_IMAGE:=s_03_dev-124dja_dev
 
 ENV_LOC:=../dev.env
 
@@ -29,9 +29,9 @@ init.dev.api: ## Initializing DRF devlopment containers.
 	make pipset.dja
 	make statprj.dja
 	make statapp.dja
-	docker cp ../../s_01_src/124dja_src/$(PRJ_NAME_01) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_01) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_11) $(CONT_NAME):code/
+	docker cp ../../s_01_src/124dja_src/$(PRJ_NAME_01) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_01) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_11) $(API_CONT):code/
 	make eject.dja
 	make run.dja
 
@@ -46,51 +46,51 @@ boot.dev.api: ## Booting  Django devlopment containers.
 #---[ 4. Container Manipulation ]------------------------------------------
 
 createuser.dja:
-	docker exec -it $(CONT_NAME) python manage.py createsuperuser --email $(E_MAIL) --username $(USER_NAME)
+	docker exec -it $(API_CONT) python manage.py createsuperuser --email $(E_MAIL) --username $(USER_NAME)
 
 contup.dja:
-	cd .. && docker compose --env-file $(ENV_LOC) up $(CONT_NAME) -d
+	cd .. && docker compose --env-file $(ENV_LOC) up $(API_CONT) -d
 
 run.dja:
-	docker exec -itd $(CONT_NAME) python manage.py runserver 0.0.0.0:8000
+	docker exec -itd $(API_CONT) python manage.py runserver 0.0.0.0:8000
 
 pipset.dja:
-	docker cp ../$(CONT_NAME)/requirements.txt $(CONT_NAME):code
-	docker exec -it $(CONT_NAME) pip install --upgrade pip
-	docker exec -it $(CONT_NAME) pip install -r requirements.txt
+	docker cp ../$(API_CONT)/requirements.txt $(API_CONT):code
+	docker exec -it $(API_CONT) pip install --upgrade pip
+	docker exec -it $(API_CONT) pip install -r requirements.txt
 
 statprj.dja:
-	docker exec -it $(CONT_NAME) django-admin startproject $(PRJ_NAME_01) .
+	docker exec -it $(API_CONT) django-admin startproject $(PRJ_NAME_01) .
 
 statapp.dja:
-	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_01)
-	docker exec -it $(CONT_NAME) python manage.py startapp $(APP_NAME_11)
+	docker exec -it $(API_CONT) python manage.py startapp $(APP_NAME_01)
+	docker exec -it $(API_CONT) python manage.py startapp $(APP_NAME_11)
 
 migrate.dja:
-	docker exec -it $(CONT_NAME) python manage.py makemigrations
-	docker exec -it $(CONT_NAME) python manage.py migrate
+	docker exec -it $(API_CONT) python manage.py makemigrations
+	docker exec -it $(API_CONT) python manage.py migrate
 
 insert.dja:
-	docker cp ../../s_01_src/124dja_src/$(PRJ_NAME_01) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_01) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/$(APP_NAME_11) $(CONT_NAME):code/
-	docker cp ../../s_01_src/124dja_src/manage.py $(CONT_NAME):code/
+	docker cp ../../s_01_src/124dja_src/$(PRJ_NAME_01) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_01) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/$(APP_NAME_11) $(API_CONT):code/
+	docker cp ../../s_01_src/124dja_src/manage.py $(API_CONT):code/
 
 eject.dja:
-	docker cp $(CONT_NAME):code/manage.py ../../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(PRJ_NAME_01)/ ../../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(APP_NAME_01) ../../s_01_src/124dja_src/
-	docker cp $(CONT_NAME):code/$(APP_NAME_11) ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/manage.py ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/$(PRJ_NAME_01)/ ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/$(APP_NAME_01) ../../s_01_src/124dja_src/
+	docker cp $(API_CONT):code/$(APP_NAME_11) ../../s_01_src/124dja_src/
 
 #---[ 5. Purge Container ]-------------------------------------------------
 
 purge.dev.api:
 	docker container ls -a
 	docker system df
-	docker stop $(CONT_NAME)
-	docker rm $(CONT_NAME)
-	docker volume rm $(VOLUME_NAME)
-	docker images rmi $(IMAGE_NAME)
+	docker stop $(API_CONT)
+	docker rm $(API_CONT)
+	docker volume rm $(API_VOLUME)
+	docker images rmi $(API_IMAGE)
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------
