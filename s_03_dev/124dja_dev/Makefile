@@ -7,12 +7,14 @@ ENV_LOC:=dev.env
 
 PRJ_NAME_01:=config
 # PRJ_NAME_02:=
+# PRJ_NAME_03:=
 
 APP_NAME_01:=users
 APP_NAME_02:=profiles
-# APP_NAME_03:=message
+# APP_NAME_03:=messages
 # APP_NAME_04:=
 APP_NAME_11:=plans
+# APP_NAME_11:=contracts
 # APP_NAME_12:=
 # APP_NAME_98:=settings
 # APP_NAME_99:=systems
