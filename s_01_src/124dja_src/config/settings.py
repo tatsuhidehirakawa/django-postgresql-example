@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': os.getenv('USER'),
         'USER': os.getenv('USER'),
         'PASSWORD': os.getenv('PGSQL_PW'),
-        'HOST': os.getenv('DATABASE_HOST'),
+        'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
     }
 }
