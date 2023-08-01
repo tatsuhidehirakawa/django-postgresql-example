@@ -40,7 +40,11 @@ boot.dev.dbs: ## Booting DBserver devlopment containers.
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
+pg_dump:
+	cd $(DBS_CONT) && make pg_dump
 
+pg_restore:
+	cd $(DBS_CONT) && make pg_restore
 
 #---[ 5. Purge Container ]-------------------------------------------------
 
@@ -66,6 +70,7 @@ purge.dev.api:
 	cd $(API_CONT) && make purge.dev.api
 
 purge.dev.dbs:
+	make pg_dump
 	cd $(DBS_CONT) && make purge.dev.dbs
 
 #---[ 6. Other Commands ]--------------------------------------------------
