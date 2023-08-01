@@ -20,7 +20,7 @@ class ObtainTokenView(views.APIView):
         username = serializer.validated_data.get('username')
         password = serializer.validated_data.get('password')
 
-        user = AccountMaster.objects.filter(mail_addless=username).first()
+        user = AccountMaster.objects.filter(mail_address=username).first()
         if user is None or not user.check_password(password):
             return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 

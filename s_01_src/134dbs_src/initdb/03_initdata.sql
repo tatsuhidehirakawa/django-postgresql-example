@@ -9,7 +9,7 @@ INSERT INTO account_attribute
 VALUES ('account_id_001_test','abc','2022/11/30 0:00:00','2022/11/30 0:00:00');
 
 INSERT INTO account_master
-  (account_id,account_name,mail_addless,password,zip_code,barth_date,time_zone,language,registration_date,create_date,update_date)
+  (account_id,account_name,mail_address,password,zip_code,barth_date,time_zone,language,registration_date,create_date,update_date)
 VALUES ('account_id_001_test','Admin','Admin@example.com','a4cjuzn2','123-4567','09/07/22','Asia/Tokyo','Japanese','09/07/22','2022/11/30 0:00:00','2022/09/07 0:00:00');
 
 INSERT INTO offer_list

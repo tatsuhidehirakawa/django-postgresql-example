@@ -29,7 +29,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
         if username is None:
             raise AuthenticationFailed('User identifier not found in JWT')
 
-        user = AccountMaster.objects.filter(mail_addless=username).first()
+        user = AccountMaster.objects.filter(mail_address=username).first()
         if user is None:
             raise AuthenticationFailed('User not found')
 
@@ -43,11 +43,11 @@ class JWTAuthentication(authentication.BaseAuthentication):
     def create_jwt(cls, user):
         # Create the JWT payload
         payload = {
-            'user_identifier': user.mail_addless,
+            'user_identifier': user.mail_address,
             'exp': int((datetime.now() + timedelta(hours=settings.JWT_CONF['TOKEN_LIFETIME_HOURS'])).timestamp()),
             # set the expiration time for 5 hour from now
             'iat': datetime.now().timestamp(),
-            'username': user.mail_addless
+            'username': user.mail_address
         }
 
         # Encode the JWT with your secret key

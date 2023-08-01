@@ -50,7 +50,7 @@ create table account_attribute (
 create table account_master (
   account_id character varying(64) not null
   , account_name character varying(20) not null
-  , mail_addless character varying not null
+  , mail_address character varying not null
   , password character varying(64) not null
   , zip_code character varying not null
   , barth_date date not null
@@ -107,7 +107,7 @@ comment on column account_attribute.update_date is 'Update Date:更新日';
 comment on table account_master is 'account_master';
 comment on column account_master.account_id is 'Account ID:ユーザID';
 comment on column account_master.account_name is 'Account Name:氏名';
-comment on column account_master.mail_addless is 'Mail Addless:メールアドレス';
+comment on column account_master.mail_address is 'Mail Addless:メールアドレス';
 comment on column account_master.password is 'Password:パスワード';
 comment on column account_master.zip_code is 'Zip Code:郵便番号';
 comment on column account_master.barth_date is 'Barth Date:誕生日';

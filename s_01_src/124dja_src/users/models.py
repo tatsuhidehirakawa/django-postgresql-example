@@ -7,7 +7,7 @@ class AccountMaster(models.Model):
     # ユーザマスタ（account_master）
     account_id = models.CharField(verbose_name="ユーザID", max_length=64, primary_key=True)
     account_name = models.CharField(verbose_name="氏名", max_length=20)
-    mail_addless = models.EmailField(verbose_name="メールアドレス", max_length=254, unique=True)
+    mail_address = models.EmailField(verbose_name="メールアドレス", max_length=254, unique=True)
     password = models.CharField(verbose_name="パスワード", max_length=64)
     zip_code = models.TextField(verbose_name="郵便番号")
     barth_date = models.DateField(verbose_name="誕生日")
