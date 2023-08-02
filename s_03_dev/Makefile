@@ -26,7 +26,7 @@ init.dev.dbs: ## Initializing DBserver devlopment containers.
 boot.dev:
 	make boot.dev.dbs
 	make boot.dev.api
-	make boot.dev.wbs	
+	make boot.dev.wbs
 	@echo "Succeful booting devlopment environment!"
 
 boot.dev.wbs: ## Booting Webserver devlopment containers.
