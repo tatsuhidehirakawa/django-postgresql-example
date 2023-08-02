@@ -8,7 +8,7 @@ ENV_LOC:=dev.env
 #---[ 2. System initialize ]-----------------------------------------------
 
 init.dev.wbs: ## Initilazing only frontend devlopment containers.
-	cd .. && docker compose --env-file $(ENV_LOC) up $(WEB_CONT) -d
+	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CNT) -d
 	make init.tailwindcss
 	make insert.code.wbs
 	make eject.code.wbs
@@ -16,37 +16,37 @@ init.dev.wbs: ## Initilazing only frontend devlopment containers.
 #---[ 3. System boot ]-----------------------------------------------------
 
 boot.dev.wbs: ## Booting only frontend devlopment containers.
-	cd .. && docker compose --env-file $(ENV_LOC) up $(WEB_CONT) -d
+	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CNT) -d
 	make init.tailwindcss
 	make insert.code.wbs
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
 init.tailwindcss:
-	@docker container exec -it $(WEB_CONT) npm install -D tailwindcss@3.2.4 postcss@8.4.19 autoprefixer@10.4.13
-	@docker cp ../../s_03_dev/$(WEB_CONT)/TailwindCSS/postcss.config.js $(WEB_CONT):usr/src/app
-	@docker cp ../../s_03_dev/$(WEB_CONT)/TailwindCSS/tailwind.config.js $(WEB_CONT):usr/src/app
-	@docker cp ../../s_03_dev/$(WEB_CONT)/TailwindCSS/index.css $(WEB_CONT):usr/src/app/src
-	@docker restart $(WEB_CONT)
+	@docker container exec -it $(WBS_CNT) npm install -D tailwindcss@3.2.4 postcss@8.4.19 autoprefixer@10.4.13
+	@docker cp ../../s_03_dev/$(WBS_CNT)/TailwindCSS/postcss.config.js $(WBS_CNT):usr/src/app
+	@docker cp ../../s_03_dev/$(WBS_CNT)/TailwindCSS/tailwind.config.js $(WBS_CNT):usr/src/app
+	@docker cp ../../s_03_dev/$(WBS_CNT)/TailwindCSS/index.css $(WBS_CNT):usr/src/app/src
+	@docker restart $(WBS_CNT)
 
 insert.code.wbs:
-	@docker cp ../../s_01_src/$(WEB_SRC)/public $(WEB_CONT):usr/src/app
-	@docker cp ../../s_01_src/$(WEB_SRC)/src $(WEB_CONT):usr/src/app
+	@docker cp ../../s_01_src/$(WBS_SRC)/public $(WBS_CNT):usr/src/app
+	@docker cp ../../s_01_src/$(WBS_SRC)/src $(WBS_CNT):usr/src/app
 
 eject.code.wbs:
-	docker cp $(WEB_CONT):usr/src/app/public ../../s_01_src/$(WEB_SRC)/
-	docker cp $(WEB_CONT):usr/src/app/src ../../s_01_src/$(WEB_SRC)/
-	docker cp $(WEB_CONT):usr/src/app/package.json ../../s_01_src/$(WEB_SRC)/
+	docker cp $(WBS_CNT):usr/src/app/public ../../s_01_src/$(WBS_SRC)/
+	docker cp $(WBS_CNT):usr/src/app/src ../../s_01_src/$(WBS_SRC)/
+	docker cp $(WBS_CNT):usr/src/app/package.json ../../s_01_src/$(WBS_SRC)/
 
 #---[ 5. Purge Container ]-------------------------------------------------
 
 purge.dev.wbs:
 	docker container ls -a
 	docker system df
-	docker stop $(WEB_CONT)
-	docker rm $(WEB_CONT)
-	docker volume rm $(WBS_VOLUME)
-	docker image rm $(WBS_IMAGE)
+	docker stop $(WBS_CNT)
+	docker rm $(WBS_CNT)
+	docker volume rm $(WBS_VOL)
+	docker image rm $(WBS_IMG)
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------

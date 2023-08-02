@@ -13,13 +13,13 @@ init.dev: ## Initializing only frontend devlopment containers.
 	@echo "Succeful initializing devlopment environment!"
 
 init.dev.wbs: ## Initilazing Webserver devlopment containers.
-	cd $(WEB_CONT) && make init.dev.wbs
+	cd $(WBS_CNT) && make init.dev.wbs
 
 init.dev.api: ## Initializing DRF devlopment containers.
-	cd $(API_CONT) && make init.dev.api
+	cd $(API_CNT) && make init.dev.api
 
 init.dev.dbs: ## Initializing DBserver devlopment containers.
-	cd $(DBS_CONT) && make init.dev.dbs
+	cd $(DBS_CNT) && make init.dev.dbs
 
 #---[ 3. System boot ]-----------------------------------------------------
 
@@ -30,21 +30,21 @@ boot.dev:
 	@echo "Succeful booting devlopment environment!"
 
 boot.dev.wbs: ## Booting Webserver devlopment containers.
-	cd $(WEB_CONT) && make boot.dev.wbs
+	cd $(WBS_CNT) && make boot.dev.wbs
 
 boot.dev.api: ## Booting DRF devlopment containers.
-	cd $(API_CONT) && make boot.dev.api
+	cd $(API_CNT) && make boot.dev.api
 
 boot.dev.dbs: ## Booting DBserver devlopment containers.
-	cd $(DBS_CONT) && make init.dev.dbs
+	cd $(DBS_CNT) && make init.dev.dbs
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
 pg_dump:
-	cd $(DBS_CONT) && make pg_dump
+	cd $(DBS_CNT) && make pg_dump
 
 pg_restore:
-	cd $(DBS_CONT) && make pg_restore
+	cd $(DBS_CNT) && make pg_restore
 
 #---[ 5. Purge Container ]-------------------------------------------------
 
@@ -64,14 +64,14 @@ purge.dev.back:
 	docker builder prune -f
 
 purge.dev.wbs:
-	cd $(WEB_CONT) && make purge.dev.wbs
+	cd $(WBS_CNT) && make purge.dev.wbs
 
 purge.dev.api:
-	cd $(API_CONT) && make purge.dev.api
+	cd $(API_CNT) && make purge.dev.api
 
 purge.dev.dbs:
 	make pg_dump
-	cd $(DBS_CONT) && make purge.dev.dbs
+	cd $(DBS_CNT) && make purge.dev.dbs
 
 #---[ 6. Other Commands ]--------------------------------------------------
 
