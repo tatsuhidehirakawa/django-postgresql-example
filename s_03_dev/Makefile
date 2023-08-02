@@ -1,10 +1,10 @@
 #.PHONY:
 
-#---[ 1. Env params ]------------------------------------------------------
+#---[ 1. Env Params ]------------------------------------------------------
 
 include dev.env
 
-#---[ 2. System initialize ]-----------------------------------------------
+#---[ 2. System Initialize ]-----------------------------------------------
 
 init.dev: ## Initializing only frontend devlopment containers.
 	make init.dev.dbs
@@ -21,7 +21,7 @@ init.dev.api: ## Initializing DRF devlopment containers.
 init.dev.dbs: ## Initializing DBserver devlopment containers.
 	cd $(DBS_CNT) && make init.dev.dbs
 
-#---[ 3. System boot ]-----------------------------------------------------
+#---[ 3. System Boot ]-----------------------------------------------------
 
 boot.dev:
 	make boot.dev.dbs

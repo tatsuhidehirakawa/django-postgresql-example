@@ -1,6 +1,6 @@
 #.PHONY:
 
-#---[ 1. Env params ]------------------------------------------------------
+#---[ 1. Env Params ]------------------------------------------------------
 
 include ../dev.env
 ENV_LOC:=dev.env
@@ -19,7 +19,7 @@ APP_011:=plans
 # APP_098:=settings
 # APP_099:=systems
 
-#---[ 2. System initialize ]-----------------------------------------------
+#---[ 2. System Initialize ]-----------------------------------------------
 
 init.dev.api: ## Initializing DRF devlopment containers.
 	make contup.dja
@@ -34,7 +34,7 @@ init.dev.api: ## Initializing DRF devlopment containers.
 	make run.dja
 	docker volume rm $(WBS_VOL)
 
-#---[ 3. System boot ]-----------------------------------------------------
+#---[ 3. System Boot ]-----------------------------------------------------
 
 boot.dev.api: ## Booting  Django devlopment containers.
 	make contup.dja

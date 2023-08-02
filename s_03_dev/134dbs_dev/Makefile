@@ -1,6 +1,6 @@
 #.PHONY:
 
-#---[ 1. Env params ]------------------------------------------------------
+#---[ 1. Env Params ]------------------------------------------------------
 
 include ../dev.env
 ENV_LOC:=dev.env
@@ -9,12 +9,12 @@ BKUP_FILE:=backup_20230731214606_134dbs_dev.sql
 # BKUP_FILE:=
 # BKUP_FILE:=
 
-#---[ 2. System initialize ]-----------------------------------------------
+#---[ 2. System Initialize ]-----------------------------------------------
 
 init.dev.dbs: ## Booting only frontend devlopment containers.
 	cd .. && docker compose --env-file $(ENV_LOC) up $(DBS_CNT) -d
 
-#---[ 3. System boot ]-----------------------------------------------------
+#---[ 3. System Boot ]-----------------------------------------------------
 
 boot.dev.dbs: ## Booting only frontend devlopment containers.
 	make init.dev.dbs

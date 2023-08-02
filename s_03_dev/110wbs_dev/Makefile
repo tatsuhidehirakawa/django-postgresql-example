@@ -1,11 +1,11 @@
 #.PHONY:
 
-#---[ 1. Env params ]------------------------------------------------------
+#---[ 1. Env Params ]------------------------------------------------------
 
 include ../dev.env
 ENV_LOC:=dev.env
 
-#---[ 2. System initialize ]-----------------------------------------------
+#---[ 2. System Initialize ]-----------------------------------------------
 
 init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CNT) -d
@@ -13,7 +13,7 @@ init.dev.wbs: ## Initilazing only frontend devlopment containers.
 	make insert.code.wbs
 	make eject.code.wbs
 
-#---[ 3. System boot ]-----------------------------------------------------
+#---[ 3. System Boot ]-----------------------------------------------------
 
 boot.dev.wbs: ## Booting only frontend devlopment containers.
 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CNT) -d
