@@ -1,2 +1,2 @@
-## Sample program made by Django,PostgreSQL,Docker
+## Sample program made by DRF,React,PostgreSQL
 
