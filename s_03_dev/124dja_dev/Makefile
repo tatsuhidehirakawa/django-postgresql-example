@@ -46,7 +46,8 @@ boot.dev.api: ## Booting  Django devlopment containers.
 #---[ 4. Container Manipulation ]------------------------------------------
 
 createuser.dja:
-	docker exec -it $(API_CON) python manage.py createsuperuser --email $(E_MAIL) --username $(USER_NAME)
+	docker exec -it $(API_CON) python manage.py createsuperuser \
+	--email $(E_MAIL) --username $(USER_NAME)
 
 contup.dja:
 	cd .. && docker compose --env-file $(ENV_LOC) up $(API_CON) -d

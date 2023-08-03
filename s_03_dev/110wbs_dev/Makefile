@@ -23,8 +23,10 @@ boot.dev.wbs: ## Booting only frontend devlopment containers.
 #---[ 4. Container Manipulation ]------------------------------------------
 
 init.tailwindcss:
-	@docker container exec -it $(WBS_CON) npm install -D tailwindcss@3.2.4 postcss@8.4.19 autoprefixer@10.4.13
-	@docker cp ../../s_03_dev/$(WBS_CON)/TailwindCSS/postcss.config.js $(WBS_CON):usr/src/app
+	@docker container exec -it $(WBS_CON) \
+	npm install -D tailwindcss@3.2.4 postcss@8.4.19 autoprefixer@10.4.13
+	@docker cp ../../s_03_dev/$(WBS_CON)/TailwindCSS/postcss.config.js \
+	$(WBS_CON):usr/src/app
 	@docker cp ../../s_03_dev/$(WBS_CON)/TailwindCSS/tailwind.config.js $(WBS_CON):usr/src/app
 	@docker cp ../../s_03_dev/$(WBS_CON)/TailwindCSS/index.css $(WBS_CON):usr/src/app/src
 	@docker restart $(WBS_CON)

@@ -30,7 +30,7 @@ services:
       - api-vol:/code
     ports:
       - "8000:8000"
-      # Port No of Host(non-overlapable):Port No of Container(overlappable)
+      # Port No. of Host(non-overlapable):Port No. of Container(overlappable)
     networks:
       - django_react_postgresql_example_network
     # command: django-admin startproject config .
@@ -56,6 +56,11 @@ services:
         POSTGRES_PASSWORD: ${PGSQL_PW}
     networks:
       - django_react_postgresql_example_network
+
+# include:
+#   - ./110wbs_dev/docker-compose.yml
+#   # - ./124dja_dev/docker-compose.yml
+#   # - ./134dbs_dev/docker-compose.yml
 
 volumes:
   wbs-vol:
