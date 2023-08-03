@@ -21,7 +21,7 @@ APP_011:=plans
 
 #---[ 2. System Initialize ]-----------------------------------------------
 
-init.dev.api: ## Initializing DRF devlopment containers.
+init.dev.api: ## Initializing API(DRF) devlopment container.
 	make contup.dja
 	make pipset.dja
 	make statprj.dja
@@ -36,7 +36,7 @@ init.dev.api: ## Initializing DRF devlopment containers.
 
 #---[ 3. System Boot ]-----------------------------------------------------
 
-boot.dev.api: ## Booting  Django devlopment containers.
+boot.dev.api: ## Booting API(DRF) devlopment container.
 	make contup.dja
 	make pipset.dja
 	make insert.dja

@@ -75,9 +75,4 @@ purge.dev.dbs:
 
 #---[ 6. Other Commands ]--------------------------------------------------
 
-ddd:
-	docker image prune -a -f
-
-ccc:
-	docker container ls -a; docker system df; docker stop $(docker ps -q); docker volume rm $(docker volume ls -qf dangling=true); docker container prune -f; docker image prune -a -f; docker builder prune -f; docker images -a -f; docker container ls -a; docker system df
 
