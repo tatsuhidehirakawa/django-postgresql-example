@@ -13,9 +13,8 @@ APP_001:=users
 APP_002:=profiles
 # APP_003:=messages
 # APP_004:=
-# APP_011:=plans
 APP_011:=contracts
-# APP_012:=
+# APP_012:=payments
 # APP_098:=settings
 # APP_099:=systems
 
