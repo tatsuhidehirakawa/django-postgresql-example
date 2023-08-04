@@ -1,10 +1,10 @@
 test
 
 endpoint:  
-http://localhost:8000/api/v1/plans/someGet/offer_id_001_test  
-http://localhost:8000/api/v1/plans/somePost/offer_id_002_test  
-http://localhost:8000/api/v1/plans/somePut/offer_id_003_test  
-http://localhost:8000/api/v1/plans/someDelete/offer_id_001_test  
+http://localhost:8000/api/v1/contracts/someGet/offer_id_001_test  
+http://localhost:8000/api/v1/contracts/somePost/offer_id_002_test  
+http://localhost:8000/api/v1/contracts/somePut/offer_id_003_test  
+http://localhost:8000/api/v1/contracts/someDelete/offer_id_001_test  
 
 
 json_sample(offer_list):

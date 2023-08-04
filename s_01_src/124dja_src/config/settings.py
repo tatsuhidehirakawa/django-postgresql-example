@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',                            # <- Initial changing.
     'users',                                     # <- add for jwt
-    'plans',
+    'contracts',
 ]
 
 MIDDLEWARE = [

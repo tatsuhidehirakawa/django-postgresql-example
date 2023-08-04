@@ -21,7 +21,7 @@ from users.views import ObtainTokenView
 
 urlpatterns = [
     path('api/v1/token', ObtainTokenView.as_view(), name='token'),
-    path('api/v1/plans/', include('plans.urls')),
+    path('api/v1/contracts/', include('contracts.urls')),
     path('api/v1/', include('users.urls')),
     path('admin/', admin.site.urls),
 ]
