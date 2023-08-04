@@ -51,6 +51,7 @@ purge.dev.wbs:
 	docker rm $(WBS_CON)
 	docker volume rm $(WBS_VOL)
 	docker image rm $(WBS_IMG)
+	docker builder prune -f
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------

@@ -41,6 +41,7 @@ purge.dev.dbs:
 	docker rm $(DBS_CON)
 	docker volume rm $(DBS_VOL)
 	docker image rm $(DBS_IMG)
+	docker builder prune -f
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------

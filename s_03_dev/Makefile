@@ -52,16 +52,13 @@ purge.dev:
 	make purge.dev.wbs
 	make purge.dev.api
 	make purge.dev.dbs
-	docker builder prune -f
 
 purge.dev.front:
 	make purge.dev.wbs
-	docker builder prune -f
 
 purge.dev.back:
 	make purge.dev.api
 	make purge.dev.dbs
-	docker builder prune -f
 
 purge.dev.wbs:
 	cd $(WBS_CON) && make purge.dev.wbs

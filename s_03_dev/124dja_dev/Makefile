@@ -95,6 +95,7 @@ purge.dev.api:
 	docker rm $(API_CON)
 	docker volume rm $(API_VOL)
 	docker image rm $(API_IMG)
+	docker builder prune -f
 	docker system df
 
 #---[ 6. Other Commands ]--------------------------------------------------
