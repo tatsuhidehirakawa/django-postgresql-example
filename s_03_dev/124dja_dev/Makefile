@@ -99,6 +99,11 @@ purge.dev.api:
 
 #---[ 6. Other Commands ]--------------------------------------------------
 
+init.app:
+	docker exec -it $(API_CON) python manage.py startapp $(APP_NEW)
+	docker exec -it $(API_CON) cd $(APP_NEW) && touch .gitkeep
+	docker cp $(API_CON):code/$(APP_NEW) ../../s_01_src/124dja_src/
+
 drfver: ## Command for checking DRF version.
 	docker exec -it 124dja_dev pip show djangorestframework
 
