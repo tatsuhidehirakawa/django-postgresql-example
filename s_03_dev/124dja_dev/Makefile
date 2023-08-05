@@ -21,7 +21,7 @@ APP_011:=contracts
 #---[ 2. System Initialize ]-----------------------------------------------
 
 init.dev.api: ## Initializing API(DRF) devlopment container.
-	make contup
+	make dcontup
 	make pipset
 	make statprj
 	make statapp
@@ -32,14 +32,17 @@ init.dev.api: ## Initializing API(DRF) devlopment container.
 #---[ 3. System Boot ]-----------------------------------------------------
 
 boot.dev.api: ## Booting API(DRF) devlopment container.
-	make contup
+	make ncontup
 	make pipset
 	make insert
 	make run
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
-contup:
+dcontup:
+	cd .. && docker compose --env-file $(ENV_LOC) up $(API_CON) -d
+
+ncontup:
 	cd .. && docker compose --env-file $(ENV_LOC) up $(API_CON) -d
 
 pipset:
