@@ -23,12 +23,11 @@ APP_011:=contracts
 init.dev.api: ## Initializing API(DRF) devlopment container.
 	make contup
 	make pipset
-	make statpj
-	make statap
-	docker cp ../../s_01_src/124dja_src/. $(API_CON):code/
+	make statprj
+	make statapp
+	make insert
 	make eject
-	make runsvr
-	docker volume rm $(WBS_VOL)
+	make execute
 
 #---[ 3. System Boot ]-----------------------------------------------------
 
@@ -36,8 +35,7 @@ boot.dev.api: ## Booting API(DRF) devlopment container.
 	make contup
 	make pipset
 	make insert
-	make runsvr
-	docker volume rm $(WBS_VOL)
+	make execute
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
@@ -49,10 +47,10 @@ pipset:
 	docker exec -it $(API_CON) pip install --upgrade pip
 	docker exec -it $(API_CON) pip install -r requirements.txt
 
-statpj:
+statprj:
 	docker exec -it $(API_CON) django-admin startproject $(PRJ_001) .
 
-statap:
+statapp:
 	docker exec -it $(API_CON) python manage.py startapp $(APP_001)
 	docker exec -it $(API_CON) python manage.py startapp $(APP_002)
 	docker exec -it $(API_CON) python manage.py startapp $(APP_011)
@@ -63,7 +61,7 @@ insert:
 eject:
 	docker cp $(API_CON):code/. ../../s_01_src/124dja_src/
 
-runsvr:
+execute:
 	docker exec -itd $(API_CON) python manage.py runserver 0.0.0.0:8000
 
 #---[ 5. Purge Container ]-------------------------------------------------
