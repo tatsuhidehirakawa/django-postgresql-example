@@ -27,7 +27,7 @@ init.dev.api: ## Initializing API(DRF) devlopment container.
 	make statapp
 	make insert
 	make eject
-	make execute
+	make run
 
 #---[ 3. System Boot ]-----------------------------------------------------
 
@@ -35,7 +35,7 @@ boot.dev.api: ## Booting API(DRF) devlopment container.
 	make contup
 	make pipset
 	make insert
-	make execute
+	make run
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
@@ -61,7 +61,7 @@ insert:
 eject:
 	docker cp $(API_CON):code/. ../../s_01_src/124dja_src/
 
-execute:
+run:
 	docker exec -itd $(API_CON) python manage.py runserver 0.0.0.0:8000
 
 #---[ 5. Purge Container ]-------------------------------------------------
