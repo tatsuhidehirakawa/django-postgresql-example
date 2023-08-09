@@ -22,7 +22,7 @@ services:
     container_name: 124dja_dev
     build:
       context: ../s_01_src/124dja_src
-      dockerfile: ../../s_03_dev/124dja_dev/Dockerfile
+      dockerfile: ../../s_04_dev/124dja_dev/Dockerfile
     env_file: dev.env
     tty: true
     volumes:
