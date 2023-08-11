@@ -11,7 +11,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true # Hot-reload
     ports:
-      - "3000:3000"
+      - "3001:3000"
     tty: true
     stdin_open: true
     networks:
