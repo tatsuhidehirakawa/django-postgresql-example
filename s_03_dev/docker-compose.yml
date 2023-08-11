@@ -15,7 +15,7 @@ services:
     tty: true
     stdin_open: true
     networks:
-      - django_react_postgresql_example_network
+      - django_nextjs_postgresql_example_network
     # platform: linux/x86_64
 
   124dja_dev:
@@ -32,7 +32,7 @@ services:
       - "8000:8000"
       # Port No. of Host(non-overlapable):Port No. of Container(overlappable)
     networks:
-      - django_react_postgresql_example_network
+      - django_nextjs_postgresql_example_network
     # command: django-admin startproject config .
     # command: python manage.py runserver 0.0.0.0:8000
     depends_on:
@@ -55,7 +55,7 @@ services:
     environment:
         POSTGRES_PASSWORD: ${PGSQL_PW}
     networks:
-      - django_react_postgresql_example_network
+      - django_nextjs_postgresql_example_network
 
 # include:
 #   - ./111wbs_dev/docker-compose.yml
@@ -68,5 +68,5 @@ volumes:
   dbs-vol:
 
 networks:
-  django_react_postgresql_example_network:
+  django_nextjs_postgresql_example_network:
     driver: bridge
