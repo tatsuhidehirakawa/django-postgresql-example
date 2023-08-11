@@ -5,7 +5,7 @@ services:
     container_name: 111wbs_dev
     build: ./111wbs_dev
     volumes:
-      - ../s_01_src/110wbs_src:/usr/src/app
+      - ../s_01_src/111wbs_src:/usr/src/app
       - wbs-vol:/usr/src/app
     working_dir: /usr/src/app
     environment:

@@ -9,9 +9,12 @@ ENV_LOC:=dev.env
 
 init.dev.wbs: ## Initilazing only frontend devlopment container.
 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
-	make init.tailwindcss
-	make insert.code.wbs
-	make eject.code.wbs
+
+# init.dev.wbs: ## Initilazing only frontend devlopment container.
+# 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
+# 	make init.tailwindcss
+# 	make insert.code.wbs
+# 	make eject.code.wbs
 
 #---[ 3. System Boot ]-----------------------------------------------------
 
@@ -25,11 +28,11 @@ boot.dev.wbs: ## Booting only frontend devlopment container.
 init.tailwindcss:
 	@docker container exec -it $(WBS_CON) npm install -D tailwindcss@3.2.4 \
 	postcss@8.4.19 autoprefixer@10.4.13
-	@docker cp ../../s_03_dev/$(WBS_CON)/TailwindCSS/postcss.config.js \
+	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/postcss.config.js \
 	$(WBS_CON):usr/src/app
-	@docker cp ../../s_03_dev/$(WBS_CON)/TailwindCSS/tailwind.config.js \
+	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/tailwind.config.js \
 	$(WBS_CON):usr/src/app
-	@docker cp ../../s_03_dev/$(WBS_CON)/TailwindCSS/index.css \
+	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/index.css \
 	$(WBS_CON):usr/src/app/src
 	@docker restart $(WBS_CON)
 
