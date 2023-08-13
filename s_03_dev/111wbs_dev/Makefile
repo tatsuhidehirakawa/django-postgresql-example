@@ -8,7 +8,7 @@ ENV_LOC:=dev.env
 #---[ 2. System Initialize ]-----------------------------------------------
 
 init.dev.wbs: ## Initilazing only frontend devlopment container.
-	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
+	docker run --rm --tty --interactive --workdir /workspace --volume .:/workspace node:16.15.0-alpine npx create-next-app@latest test
 
 # init.dev.wbs: ## Initilazing only frontend devlopment container.
 # 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
