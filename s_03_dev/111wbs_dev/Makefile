@@ -9,8 +9,10 @@ ENV_LOC:=dev.env
 
 init.dev.wbs: ## Initilazing only frontend devlopment container.
 	@docker volume create $(WBS_VOL)
-	@docker run --rm --workdir /workspace --volume $(WBS_VOL):/workspace node:16.15.0-alpine npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias '@/*'
-	make boot.dev.wbs
+	@docker run --rm --workdir /workspace --volume $(WBS_VOL):/workspace \
+	node:16.15.0-alpine npx create-next-app@latest . --typescript --tailwind \
+	--eslint --app --src-dir --import-alias '@/*'
+#	make boot.dev.wbs
 
 # init.dev.wbs: ## Initilazing only frontend devlopment container.
 # 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
@@ -23,7 +25,7 @@ init.dev.wbs: ## Initilazing only frontend devlopment container.
 boot.dev.wbs: ## Booting only frontend devlopment container.
 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
 #	make init.tailwindcss
-	make insert.code.wbs
+#	make insert.code.wbs
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
