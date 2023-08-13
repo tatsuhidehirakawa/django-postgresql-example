@@ -41,9 +41,12 @@ insert.code.wbs:
 	@docker cp ../../s_01_src/$(WBS_SRC)/src $(WBS_CON):usr/src/app
 
 eject.code.wbs:
-	docker cp $(WBS_CON):usr/src/app/public ../../s_01_src/$(WBS_SRC)/
-	docker cp $(WBS_CON):usr/src/app/src ../../s_01_src/$(WBS_SRC)/
-	docker cp $(WBS_CON):usr/src/app/package.json ../../s_01_src/$(WBS_SRC)/
+	docker cp $(WBS_CON):usr/src/app/. ../../s_01_src/$(WBS_SRC)/
+
+# eject.code.wbs:
+# 	docker cp $(WBS_CON):usr/src/app/public ../../s_01_src/$(WBS_SRC)/
+# 	docker cp $(WBS_CON):usr/src/app/src ../../s_01_src/$(WBS_SRC)/
+# 	docker cp $(WBS_CON):usr/src/app/package.json ../../s_01_src/$(WBS_SRC)/
 
 #---[ 5. Purge Container ]-------------------------------------------------
 
