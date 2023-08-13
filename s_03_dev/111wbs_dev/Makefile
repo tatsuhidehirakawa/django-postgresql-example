@@ -8,7 +8,9 @@ ENV_LOC:=dev.env
 #---[ 2. System Initialize ]-----------------------------------------------
 
 init.dev.wbs: ## Initilazing only frontend devlopment container.
-	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
+	@docker volume create $(WBS_VOL)
+	@docker run --rm --workdir /workspace --volume $(WBS_VOL):/workspace node:16.15.0-alpine npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias '@/*'
+	make boot.dev.wbs
 
 # init.dev.wbs: ## Initilazing only frontend devlopment container.
 # 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
@@ -20,14 +22,12 @@ init.dev.wbs: ## Initilazing only frontend devlopment container.
 
 boot.dev.wbs: ## Booting only frontend devlopment container.
 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
-	make init.tailwindcss
+#	make init.tailwindcss
 	make insert.code.wbs
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
 init.tailwindcss:
-	@docker container exec -it $(WBS_CON) npm install -D tailwindcss@3.2.4 \
-	postcss@8.4.19 autoprefixer@10.4.13
 	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/postcss.config.js \
 	$(WBS_CON):usr/src/app
 	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/tailwind.config.js \
