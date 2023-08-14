@@ -24,7 +24,6 @@ init.dev.dbs: ## Initializing DBserver devlopment containers.
 #---[ 3. System Boot ]-----------------------------------------------------
 
 boot.dev:
-	make boot.dev.dbs
 	make boot.dev.api
 	make boot.dev.wbs
 	@echo "Succeful booting devlopment environment!"
@@ -33,10 +32,11 @@ boot.dev.wbs: ## Booting Webserver devlopment containers.
 	cd $(WBS_CON) && make boot.dev.wbs
 
 boot.dev.api: ## Booting DRF devlopment containers.
+	make boot.dev.dbs
 	cd $(API_CON) && make boot.dev.api
 
 boot.dev.dbs: ## Booting DBserver devlopment containers.
-	cd $(DBS_CON) && make init.dev.dbs
+	cd $(DBS_CON) && make boot.dev.dbs
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
