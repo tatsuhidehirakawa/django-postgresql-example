@@ -10,39 +10,38 @@ ENV_LOC:=dev.env
 init.dev.wbs: ## Initilazing only frontend devlopment container.
 	@docker volume create $(WBS_VOL)
 	@docker run --rm --workdir /workspace --volume $(WBS_VOL):/workspace \
-	node:16.15.0-alpine npx create-next-app@latest . --typescript --tailwind \
-	--eslint --app --src-dir --import-alias '@/*'
+	node:16.15.0-alpine npx create-next-app@latest . --typescript \
+	--tailwind --eslint --app --src-dir --import-alias '@/*'
 #	make boot.dev.wbs
 
 # init.dev.wbs: ## Initilazing only frontend devlopment container.
 # 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
 # 	make init.tailwindcss
-# 	make insert.code.wbs
-# 	make eject.code.wbs
+# 	make insert
+# 	make eject
 
 #---[ 3. System Boot ]-----------------------------------------------------
 
 boot.dev.wbs: ## Booting only frontend devlopment container.
 	cd .. && docker compose --env-file $(ENV_LOC) up $(WBS_CON) -d
-#	make init.tailwindcss
-#	make insert.code.wbs
+#	make insert
 
 #---[ 4. Container Manipulation ]------------------------------------------
 
-init.tailwindcss:
-	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/postcss.config.js \
-	$(WBS_CON):usr/src/app
-	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/tailwind.config.js \
-	$(WBS_CON):usr/src/app
-	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/index.css \
-	$(WBS_CON):usr/src/app/src
-	@docker restart $(WBS_CON)
+# init.tailwindcss:
+# 	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/postcss.config.js \
+# 	$(WBS_CON):usr/src/app
+# 	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/tailwind.config.js \
+# 	$(WBS_CON):usr/src/app
+# 	@docker cp ../../s_04_dev/$(WBS_CON)/TailwindCSS/index.css \
+# 	$(WBS_CON):usr/src/app/src
+# 	@docker restart $(WBS_CON)
 
-insert.code.wbs:
+insert:
 	@docker cp ../../s_01_src/$(WBS_SRC)/public $(WBS_CON):usr/src/app
 	@docker cp ../../s_01_src/$(WBS_SRC)/src $(WBS_CON):usr/src/app
 
-eject.code.wbs:
+eject:
 	docker cp $(WBS_CON):usr/src/app/. ../../s_01_src/$(WBS_SRC)/
 
 # eject.code.wbs:
