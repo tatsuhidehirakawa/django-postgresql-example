@@ -53,6 +53,3 @@ rplccrlf:
 	docker exec $(DBS_CON) /bin/sh -c "sed -i 's/\r//' /usr/src/dbstore/*.sh"
 
 
-	docker container prune -f
-	docker image prune -a -f
-	docker builder prune -f
