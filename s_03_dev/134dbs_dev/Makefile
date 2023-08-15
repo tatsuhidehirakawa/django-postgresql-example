@@ -5,7 +5,7 @@
 include ../dev.env
 ENV_LOC:=dev.env
 
-BKUP_FILE:=backup_20230814135147_134dbs_dev.sql
+BKUP_FILE:=backup_20230815010638_134dbs_dev.sql
 # BKUP_FILE:=
 # BKUP_FILE:=
 
@@ -53,6 +53,3 @@ rplccrlf:
 	docker exec $(DBS_CON) /bin/sh -c "sed -i 's/\r//' /usr/src/dbstore/*.sh"
 
 
-	docker container prune -f
-	docker image prune -a -f
-	docker builder prune -f
