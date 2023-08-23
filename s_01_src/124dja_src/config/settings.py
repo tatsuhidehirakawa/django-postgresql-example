@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',                            # <- Initial changing.
     'users',                                     # <- add for jwt
     'contracts',
+    'profiles',                                  # <- add for profiles
 ]
 
 MIDDLEWARE = [
