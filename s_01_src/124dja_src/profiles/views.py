@@ -43,6 +43,7 @@ def detail(request, pk):
 
 @api_view(['GET'])
 def search(request):
+    current_user = request.user
     if request.query_params:
         if request.query_params.get("self_introduction"):
             q = Q(self_introduction__contains=request.query_params.get("self_introduction"))
@@ -54,9 +55,9 @@ def search(request):
         if request.query_params.get("rate"):
             q = q | Q(rate__gte=request.query_params.get("rate"))
 
-        items = Profile.objects.filter(q).order_by('status', '-rate', 'account_id')
+        items = Profile.objects.filter(q & ~Q(account_id=current_user.account_id)).order_by('status', '-rate', 'account_id')
     else:
-        items = Profile.objects.all().order_by('status', '-rate', 'account_id')
+        items = Profile.objects.filter(~Q(account_id=current_user.account_id)).order_by('status', '-rate', 'account_id')
 
     serializer = ProfileSerializer(items, many=True, remove_fields=['twitter_uri', 'facebook_uri', 'instagram_uri', 'skill'])
     return Response(serializer.data)
@@ -68,12 +69,12 @@ class ProfileSearchPagination(PageNumberPagination):
 
 
 class ProfileSearch(ListAPIView):
+    permission_classes = [IsAuthenticated]
     pagination_class = ProfileSearchPagination
     serializer_class = ProfileListSerializer
-    page_size = 1
-    max_page_size = 1000
 
     def get_queryset(self):
+        current_user = self.request.user
         if self.request.query_params.get("self_introduction"):
             q = Q(self_introduction__contains=self.request.query_params.get("self_introduction"))
         else:
@@ -84,4 +85,4 @@ class ProfileSearch(ListAPIView):
         if self.request.query_params.get("rate"):
             q = q | Q(rate__gte=self.request.query_params.get("rate"))
 
-        return Profile.objects.filter(q).order_by('status', '-rate', 'account_id')
+        return Profile.objects.filter(q & ~Q(account_id=current_user.account_id)).order_by('status', '-rate', 'account_id')
